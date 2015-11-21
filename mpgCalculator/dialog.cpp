@@ -3,10 +3,9 @@
 ** This file was written by Patrick Ly-Vo.
 **
 ****************************************************************************/
+
 #include "dialog.h"
 #include "ui_dialog.h"
-
-#include <QLabel>
 
 Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
