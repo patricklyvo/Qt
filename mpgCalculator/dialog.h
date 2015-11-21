@@ -1,3 +1,9 @@
+/****************************************************************************
+**
+** This file was written by Patrick Ly-Vo.
+**
+****************************************************************************/
+
 #ifndef DIALOG_H
 #define DIALOG_H
 
@@ -20,15 +26,20 @@ public:
 
 private:
     Ui::Dialog *ui;
+    QComboBox *selection;
+    QLabel *label1;
+    QLabel *label2;
     QLineEdit *input1;
     QLineEdit *input2;
+    QLineEdit *result;
 
 signals:
-    void redirectData(QString input1, QString input2);
+    void redirectData(int index, QString input1, QString input2);
 
 public slots:
+    void selectionChanged(int index);
     void sendData();
-    void calculateResult(QString input1, QString input2);
+    void calculateResult(int index, QString input1, QString input2);
 
 };
 
