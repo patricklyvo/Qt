@@ -10,5 +10,6 @@
         <file>save.png</file>
         <file>saveas.png</file>
         <file>undo.png</file>
+        <file>font.png</file>
     </qresource>
 </RCC>
