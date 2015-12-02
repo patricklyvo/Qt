@@ -19,7 +19,6 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTextEdit>
-#include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -36,12 +35,13 @@ public:
     QAction *actionCopy;
     QAction *actionPaste;
     QAction *actionRedo;
+    QAction *actionFont;
     QWidget *centralWidget;
     QTextEdit *textEdit;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuEdit;
-    QToolBar *mainToolBar;
+    QMenu *menuFormat;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -94,6 +94,11 @@ public:
         QIcon icon8;
         icon8.addFile(QStringLiteral(":/images/redo.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionRedo->setIcon(icon8);
+        actionFont = new QAction(MainWindow);
+        actionFont->setObjectName(QStringLiteral("actionFont"));
+        QIcon icon9;
+        icon9.addFile(QStringLiteral(":/images/font.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionFont->setIcon(icon9);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         textEdit = new QTextEdit(centralWidget);
@@ -107,16 +112,16 @@ public:
         menuFile->setObjectName(QStringLiteral("menuFile"));
         menuEdit = new QMenu(menuBar);
         menuEdit->setObjectName(QStringLiteral("menuEdit"));
+        menuFormat = new QMenu(menuBar);
+        menuFormat->setObjectName(QStringLiteral("menuFormat"));
         MainWindow->setMenuBar(menuBar);
-        mainToolBar = new QToolBar(MainWindow);
-        mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
-        MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
         MainWindow->setStatusBar(statusBar);
 
         menuBar->addAction(menuFile->menuAction());
         menuBar->addAction(menuEdit->menuAction());
+        menuBar->addAction(menuFormat->menuAction());
         menuFile->addAction(actionNew);
         menuFile->addAction(actionOpen);
         menuFile->addAction(actionSave);
@@ -127,16 +132,7 @@ public:
         menuEdit->addAction(actionCut);
         menuEdit->addAction(actionCopy);
         menuEdit->addAction(actionPaste);
-        mainToolBar->addAction(actionNew);
-        mainToolBar->addAction(actionOpen);
-        mainToolBar->addAction(actionSave);
-        mainToolBar->addAction(actionSave_As);
-        mainToolBar->addAction(actionCopy);
-        mainToolBar->addAction(actionCut);
-        mainToolBar->addAction(actionPaste);
-        mainToolBar->addSeparator();
-        mainToolBar->addAction(actionUndo);
-        mainToolBar->addAction(actionRedo);
+        menuFormat->addAction(actionFont);
 
         retranslateUi(MainWindow);
 
@@ -155,8 +151,10 @@ public:
         actionCopy->setText(QApplication::translate("MainWindow", "Copy", 0));
         actionPaste->setText(QApplication::translate("MainWindow", "Paste", 0));
         actionRedo->setText(QApplication::translate("MainWindow", "Redo", 0));
+        actionFont->setText(QApplication::translate("MainWindow", "Font", 0));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", 0));
         menuEdit->setTitle(QApplication::translate("MainWindow", "Edit", 0));
+        menuFormat->setTitle(QApplication::translate("MainWindow", "Format", 0));
     } // retranslateUi
 
 };
