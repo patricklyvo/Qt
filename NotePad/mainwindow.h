@@ -41,10 +41,13 @@ private slots:
 
     void on_actionFind_triggered();
 
+public slots:
+    void findString(QString searchString);
+
 private:
     Ui::MainWindow *ui;
     QString fileName;
-    FindDialog *mFindDialog;
+    FindDialog *findDialog;
 };
 
 #endif // MAINWINDOW_H

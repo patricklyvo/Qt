@@ -38,9 +38,9 @@ public:
     QCheckBox *checkBox;
     QWidget *widget;
     QVBoxLayout *verticalLayout_2;
-    QPushButton *pushButton;
-    QPushButton *pushButton_2;
-    QLineEdit *lineEdit;
+    QPushButton *findPushButton;
+    QPushButton *cancelPushButton;
+    QLineEdit *findLineEdit;
     QLabel *label;
 
     void setupUi(QDialog *FindDialog)
@@ -77,28 +77,28 @@ public:
         verticalLayout_2 = new QVBoxLayout(widget);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         verticalLayout_2->setContentsMargins(0, 0, 0, 0);
-        pushButton = new QPushButton(widget);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
+        findPushButton = new QPushButton(widget);
+        findPushButton->setObjectName(QStringLiteral("findPushButton"));
 
-        verticalLayout_2->addWidget(pushButton);
+        verticalLayout_2->addWidget(findPushButton);
 
-        pushButton_2 = new QPushButton(widget);
-        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
+        cancelPushButton = new QPushButton(widget);
+        cancelPushButton->setObjectName(QStringLiteral("cancelPushButton"));
 
-        verticalLayout_2->addWidget(pushButton_2);
+        verticalLayout_2->addWidget(cancelPushButton);
 
-        lineEdit = new QLineEdit(FindDialog);
-        lineEdit->setObjectName(QStringLiteral("lineEdit"));
-        lineEdit->setGeometry(QRect(67, 10, 171, 20));
+        findLineEdit = new QLineEdit(FindDialog);
+        findLineEdit->setObjectName(QStringLiteral("findLineEdit"));
+        findLineEdit->setGeometry(QRect(67, 10, 171, 20));
         label = new QLabel(FindDialog);
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(10, 10, 51, 16));
         label->raise();
-        lineEdit->raise();
-        lineEdit->raise();
+        findLineEdit->raise();
+        findLineEdit->raise();
         label->raise();
-        pushButton->raise();
-        pushButton_2->raise();
+        findPushButton->raise();
+        cancelPushButton->raise();
         groupBox->raise();
         checkBox->raise();
 
@@ -114,8 +114,8 @@ public:
         radioButton->setText(QApplication::translate("FindDialog", "Up", 0));
         radioButton_2->setText(QApplication::translate("FindDialog", "Down", 0));
         checkBox->setText(QApplication::translate("FindDialog", "Match case", 0));
-        pushButton->setText(QApplication::translate("FindDialog", "Find Next", 0));
-        pushButton_2->setText(QApplication::translate("FindDialog", "Cancel", 0));
+        findPushButton->setText(QApplication::translate("FindDialog", "Find Next", 0));
+        cancelPushButton->setText(QApplication::translate("FindDialog", "Cancel", 0));
         label->setText(QApplication::translate("FindDialog", "Find what:", 0));
     } // retranslateUi
 

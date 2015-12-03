@@ -17,6 +17,14 @@ public:
     explicit FindDialog(QWidget *parent = 0);
     ~FindDialog();
 
+private slots:
+    void on_findPushButton_clicked();
+
+    void on_cancelPushButton_clicked();
+
+signals:
+    void findClicked(QString searchString);
+
 private:
     Ui::FindDialog *ui;
 };

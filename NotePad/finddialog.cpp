@@ -12,3 +12,13 @@ FindDialog::~FindDialog()
 {
     delete ui;
 }
+
+void FindDialog::on_findPushButton_clicked()
+{
+    emit findClicked(ui->findLineEdit->text());
+}
+
+void FindDialog::on_cancelPushButton_clicked()
+{
+    this->close();
+}

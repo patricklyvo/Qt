@@ -70,14 +70,14 @@
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="findPushButton">
       <property name="text">
        <string>Find Next</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton_2">
+     <widget class="QPushButton" name="cancelPushButton">
       <property name="text">
        <string>Cancel</string>
       </property>
@@ -85,7 +85,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QLineEdit" name="findLineEdit">
    <property name="geometry">
     <rect>
      <x>67</x>
@@ -109,11 +109,11 @@
    </property>
   </widget>
   <zorder>label</zorder>
-  <zorder>lineEdit</zorder>
-  <zorder>lineEdit</zorder>
+  <zorder>findLineEdit</zorder>
+  <zorder>findLineEdit</zorder>
   <zorder>label</zorder>
-  <zorder>pushButton</zorder>
-  <zorder>pushButton_2</zorder>
+  <zorder>findPushButton</zorder>
+  <zorder>cancelPushButton</zorder>
   <zorder>groupBox</zorder>
   <zorder>checkBox</zorder>
  </widget>

@@ -135,6 +135,13 @@ void MainWindow::on_actionFont_triggered()
 // find dialog
 void MainWindow::on_actionFind_triggered()
 {
-    mFindDialog = new FindDialog(this);
-    mFindDialog->show();
+    findDialog = new FindDialog(this);
+    findDialog->show();
+
+    connect(findDialog, SIGNAL(findClicked(QString)), this, SLOT(findString(QString)));
+}
+
+void MainWindow::findString(QString searchString)
+{
+    ui->textEdit->find(searchString, QTextDocument::FindWholeWords);
 }
