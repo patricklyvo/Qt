@@ -102,6 +102,9 @@ public:
         actionFont->setIcon(icon9);
         actionFind = new QAction(MainWindow);
         actionFind->setObjectName(QStringLiteral("actionFind"));
+        QIcon icon10;
+        icon10.addFile(QStringLiteral(":/images/search.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionFind->setIcon(icon10);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         textEdit = new QTextEdit(centralWidget);

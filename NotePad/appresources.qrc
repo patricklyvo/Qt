@@ -11,5 +11,6 @@
         <file>saveas.png</file>
         <file>undo.png</file>
         <file>font.png</file>
+        <file>search.png</file>
     </qresource>
 </RCC>

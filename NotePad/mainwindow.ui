@@ -158,6 +158,10 @@
    </property>
   </action>
   <action name="actionFind">
+   <property name="icon">
+    <iconset resource="appresources.qrc">
+     <normaloff>:/images/search.png</normaloff>:/images/search.png</iconset>
+   </property>
    <property name="text">
     <string>Find</string>
    </property>
