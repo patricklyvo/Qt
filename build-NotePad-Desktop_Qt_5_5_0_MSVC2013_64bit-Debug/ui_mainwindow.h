@@ -36,6 +36,7 @@ public:
     QAction *actionPaste;
     QAction *actionRedo;
     QAction *actionFont;
+    QAction *actionFind;
     QWidget *centralWidget;
     QTextEdit *textEdit;
     QMenuBar *menuBar;
@@ -48,7 +49,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(400, 300);
+        MainWindow->resize(717, 480);
         actionNew = new QAction(MainWindow);
         actionNew->setObjectName(QStringLiteral("actionNew"));
         QIcon icon;
@@ -99,6 +100,8 @@ public:
         QIcon icon9;
         icon9.addFile(QStringLiteral(":/images/font.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionFont->setIcon(icon9);
+        actionFind = new QAction(MainWindow);
+        actionFind->setObjectName(QStringLiteral("actionFind"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         textEdit = new QTextEdit(centralWidget);
@@ -107,7 +110,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 400, 21));
+        menuBar->setGeometry(QRect(0, 0, 717, 21));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
         menuEdit = new QMenu(menuBar);
@@ -132,6 +135,8 @@ public:
         menuEdit->addAction(actionCut);
         menuEdit->addAction(actionCopy);
         menuEdit->addAction(actionPaste);
+        menuEdit->addSeparator();
+        menuEdit->addAction(actionFind);
         menuFormat->addAction(actionFont);
 
         retranslateUi(MainWindow);
@@ -152,6 +157,7 @@ public:
         actionPaste->setText(QApplication::translate("MainWindow", "Paste", 0));
         actionRedo->setText(QApplication::translate("MainWindow", "Redo", 0));
         actionFont->setText(QApplication::translate("MainWindow", "Font", 0));
+        actionFind->setText(QApplication::translate("MainWindow", "Find", 0));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", 0));
         menuEdit->setTitle(QApplication::translate("MainWindow", "Edit", 0));
         menuFormat->setTitle(QApplication::translate("MainWindow", "Format", 0));

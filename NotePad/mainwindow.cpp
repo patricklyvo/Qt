@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "finddialog.h"
 #include <QtWidgets>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -129,4 +130,11 @@ void MainWindow::on_actionFont_triggered()
     {
         ui->textEdit->setFont(font);
     }
+}
+
+// find dialog
+void MainWindow::on_actionFind_triggered()
+{
+    mFindDialog = new FindDialog(this);
+    mFindDialog->show();
 }

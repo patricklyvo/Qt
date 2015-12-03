@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QtCore>
 #include <QtGui>
+#include "finddialog.h"
 
 namespace Ui {
 class MainWindow;
@@ -38,9 +39,12 @@ private slots:
 
     void on_actionFont_triggered();
 
+    void on_actionFind_triggered();
+
 private:
     Ui::MainWindow *ui;
     QString fileName;
+    FindDialog *mFindDialog;
 };
 
 #endif // MAINWINDOW_H
