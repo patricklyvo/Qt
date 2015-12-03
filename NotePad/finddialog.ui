@@ -29,16 +29,19 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <widget class="QRadioButton" name="radioButton">
+       <widget class="QRadioButton" name="upRadioButton">
         <property name="text">
          <string>Up</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QRadioButton" name="radioButton_2">
+       <widget class="QRadioButton" name="downRadioButton">
         <property name="text">
          <string>Down</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
         </property>
        </widget>
       </item>

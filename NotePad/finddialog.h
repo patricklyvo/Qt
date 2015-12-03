@@ -22,8 +22,16 @@ private slots:
 
     void on_cancelPushButton_clicked();
 
+    void on_upRadioButton_clicked();
+
+    void on_downRadioButton_clicked();
+
+    void on_checkBox_clicked();
+
 signals:
     void findClicked(QString searchString);
+    void directionClicked(bool down);
+    void matchCaseClicked(int state);
 
 private:
     Ui::FindDialog *ui;

@@ -43,11 +43,16 @@ private slots:
 
 public slots:
     void findString(QString searchString);
+    void changeFindDirection(bool down);
+    void changeMatchCase(int state);
 
 private:
     Ui::MainWindow *ui;
     QString fileName;
+
     FindDialog *findDialog;
+    bool findDirectionDown;
+    int findMatchCaseState;
 };
 
 #endif // MAINWINDOW_H

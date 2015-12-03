@@ -33,8 +33,8 @@ public:
     QGroupBox *groupBox;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout_2;
-    QRadioButton *radioButton;
-    QRadioButton *radioButton_2;
+    QRadioButton *upRadioButton;
+    QRadioButton *downRadioButton;
     QCheckBox *checkBox;
     QWidget *widget;
     QVBoxLayout *verticalLayout_2;
@@ -55,15 +55,16 @@ public:
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        radioButton = new QRadioButton(groupBox);
-        radioButton->setObjectName(QStringLiteral("radioButton"));
+        upRadioButton = new QRadioButton(groupBox);
+        upRadioButton->setObjectName(QStringLiteral("upRadioButton"));
 
-        horizontalLayout_2->addWidget(radioButton);
+        horizontalLayout_2->addWidget(upRadioButton);
 
-        radioButton_2 = new QRadioButton(groupBox);
-        radioButton_2->setObjectName(QStringLiteral("radioButton_2"));
+        downRadioButton = new QRadioButton(groupBox);
+        downRadioButton->setObjectName(QStringLiteral("downRadioButton"));
+        downRadioButton->setChecked(true);
 
-        horizontalLayout_2->addWidget(radioButton_2);
+        horizontalLayout_2->addWidget(downRadioButton);
 
 
         verticalLayout->addLayout(horizontalLayout_2);
@@ -111,8 +112,8 @@ public:
     {
         FindDialog->setWindowTitle(QApplication::translate("FindDialog", "Dialog", 0));
         groupBox->setTitle(QApplication::translate("FindDialog", "Direction", 0));
-        radioButton->setText(QApplication::translate("FindDialog", "Up", 0));
-        radioButton_2->setText(QApplication::translate("FindDialog", "Down", 0));
+        upRadioButton->setText(QApplication::translate("FindDialog", "Up", 0));
+        downRadioButton->setText(QApplication::translate("FindDialog", "Down", 0));
         checkBox->setText(QApplication::translate("FindDialog", "Match case", 0));
         findPushButton->setText(QApplication::translate("FindDialog", "Find Next", 0));
         cancelPushButton->setText(QApplication::translate("FindDialog", "Cancel", 0));

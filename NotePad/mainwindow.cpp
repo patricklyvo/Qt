@@ -135,13 +135,56 @@ void MainWindow::on_actionFont_triggered()
 // find dialog
 void MainWindow::on_actionFind_triggered()
 {
+    // set find direction to down and match case to 0
+    findDirectionDown = true;
+    findMatchCaseState = 0;
+    // show FindDialog
     findDialog = new FindDialog(this);
     findDialog->show();
 
+    // connecting signal and slot to start finding the specified string
     connect(findDialog, SIGNAL(findClicked(QString)), this, SLOT(findString(QString)));
+    // connecting signal and slot to change find direction
+    connect(findDialog, SIGNAL(directionClicked(bool)), this, SLOT(changeFindDirection(bool)));
+    // connecting signal and slot to change match case state
+    connect(findDialog, SIGNAL(matchCaseClicked(int)), this, SLOT(changeMatchCase(int)));
 }
 
+// find string
 void MainWindow::findString(QString searchString)
 {
-    ui->textEdit->find(searchString, QTextDocument::FindWholeWords);
+    if (findMatchCaseState == 0)
+    {
+        if (findDirectionDown)
+        {
+            ui->textEdit->find(searchString, QTextDocument::FindWholeWords);
+        }
+        else
+        {
+            ui->textEdit->find(searchString, QTextDocument::FindWholeWords | QTextDocument::FindBackward);
+        }
+    }
+    else
+    {
+        if (findDirectionDown)
+        {
+            ui->textEdit->find(searchString, QTextDocument::FindWholeWords | QTextDocument::FindCaseSensitively);
+        }
+        else
+        {
+            ui->textEdit->find(searchString, QTextDocument::FindWholeWords | QTextDocument::FindBackward | QTextDocument::FindCaseSensitively);
+        }
+    }
+}
+
+// find direction
+void MainWindow::changeFindDirection(bool down)
+{
+    findDirectionDown = down;
+}
+
+// find match case
+void MainWindow::changeMatchCase(int state)
+{
+    findMatchCaseState = state;
 }

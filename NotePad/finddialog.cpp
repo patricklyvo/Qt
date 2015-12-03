@@ -22,3 +22,25 @@ void FindDialog::on_cancelPushButton_clicked()
 {
     this->close();
 }
+
+void FindDialog::on_upRadioButton_clicked()
+{
+    emit directionClicked(false);
+}
+
+void FindDialog::on_downRadioButton_clicked()
+{
+    emit directionClicked(true);
+}
+
+void FindDialog::on_checkBox_clicked()
+{
+    if (ui->checkBox->isChecked())
+    {
+        emit matchCaseClicked(1);
+    }
+    else
+    {
+        emit matchCaseClicked(0);
+    }
+}
