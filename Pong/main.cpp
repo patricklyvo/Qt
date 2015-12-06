@@ -1,11 +1,16 @@
 #include "pong.h"
+#include "settings.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    Pong game;
-    game.show();
+
+    Settings config;
+    config.show();
+
+    //Pong game;
+    //game.show();
 
     return a.exec();
 }

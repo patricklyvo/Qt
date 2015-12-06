@@ -13,6 +13,9 @@ Pong::Pong(QWidget *parent) :
     scene = new QGraphicsScene(this);
     ui->graphicsView->setScene(scene);
 
+    // Ask for players
+    scene->addText("How many people are playing?");
+
     // tell graphics view type of rendering we want
     ui->graphicsView->setRenderHint(QPainter::Antialiasing);
     scene->setSceneRect(0, 0, WIDTH, HEIGHT);
@@ -33,8 +36,9 @@ Pong::Pong(QWidget *parent) :
     scene->addLine(leftLine, borderPen);
     scene->addLine(rightLine, borderPen);
     scene->addLine(bottomLine, borderPen);
-    //scene->addLine(centerLine);
+    scene->addLine(centerLine);
 
+    // number of ping pong balls in game
     int itemCount = 1;
     for (int i = 0; i < itemCount; i++) {
         Ball *item = new Ball;

@@ -28,6 +28,7 @@ private:
     Ui::Pong *ui;
     QGraphicsScene *scene;
     QTimer *timer;
+    int players;
 };
 
 #endif // PONG_H
