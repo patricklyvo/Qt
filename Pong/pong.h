@@ -6,9 +6,8 @@
 #include <QtGui>
 #include <QtWidgets>
 
-#define WIDTH 600
-#define HEIGHT (WIDTH/4*3)
-#define PADDLE (WIDTH/15)
+#define WIDTH 512
+#define HEIGHT (WIDTH / 2)
 
 namespace Ui {
 class Pong;
@@ -21,6 +20,9 @@ class Pong : public QDialog
 public:
     explicit Pong(QWidget *parent = 0);
     ~Pong();
+
+protected:
+    void keyPressEvent(QKeyEvent *e);
 
 private:
     Ui::Pong *ui;

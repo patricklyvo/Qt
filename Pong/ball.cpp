@@ -43,8 +43,10 @@ void Ball::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
         doCollision();
     }
 
-    painter->fillRect(rec, brush);
-    painter->drawRect(rec);
+    //painter->fillRect(rec, brush);
+    //painter->drawRect(rec);
+    painter->setBrush(brush);
+    painter->drawEllipse(rec);
 }
 
 void Ball::advance(int phase)

@@ -33,7 +33,7 @@ Pong::Pong(QWidget *parent) :
     scene->addLine(leftLine, borderPen);
     scene->addLine(rightLine, borderPen);
     scene->addLine(bottomLine, borderPen);
-    //scene->addLine(centerLine);
+    scene->addLine(centerLine);
 
     int itemCount = 1;
     for (int i = 0; i < itemCount; i++) {
@@ -52,3 +52,32 @@ Pong::~Pong()
 {
     delete ui;
 }
+
+void Pong::keyPressEvent(QKeyEvent *e)
+{
+        int p1 = 0;
+        int p2 = 0;
+
+        switch(e->key()) {
+
+        case (Qt::Key_Up):
+                p1 = -1;
+                break;
+        case (Qt::Key_Down):
+                p1 = 1;
+                break;
+        case (Qt::Key_W):
+                p2 = -1;
+                break;
+        case (Qt::Key_S):
+                p2 = 1;
+                break;
+        default:
+                p1 = 0;
+                p2 = 0;
+                break;
+        }
+
+        // move paddles
+}
+
