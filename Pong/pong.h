@@ -6,6 +6,10 @@
 #include <QtGui>
 #include <QtWidgets>
 
+#define WIDTH 600
+#define HEIGHT (WIDTH/4*3)
+#define PADDLE (WIDTH/15)
+
 namespace Ui {
 class Pong;
 }

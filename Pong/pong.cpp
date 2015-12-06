@@ -1,15 +1,13 @@
 #include "pong.h"
 #include "ui_pong.h"
-
-#define WIDTH 600
-#define HEIGHT (WIDTH/4*3)
-#define PADDLE (WIDTH/15)
+#include "ball.h"
 
 Pong::Pong(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Pong)
 {
     ui->setupUi(this);
+    resize(WIDTH * 1.1, HEIGHT  * 1.1);
     setWindowTitle("Pong");
 
     scene = new QGraphicsScene(this);
@@ -33,9 +31,16 @@ Pong::Pong(QWidget *parent) :
     scene->addLine(rightLine, borderPen);
     scene->addLine(bottomLine, borderPen);
 
+    int itemCount = 1;
+    for (int i = 0; i < itemCount; i++) {
+        Ball *item = new Ball;
+        scene->addItem(item);
+    }
+
     // timer ticks, advance notifies objects in scene to advance one/multiple steps
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), scene, SLOT(advance()));
+    // timer is going off every 100ms
     timer->start(100);
 }
 

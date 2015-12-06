@@ -4,8 +4,8 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    Pong w;
-    w.show();
+    Pong game;
+    game.show();
 
     return a.exec();
 }
