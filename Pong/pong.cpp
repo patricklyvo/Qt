@@ -33,7 +33,7 @@ Pong::Pong(QWidget *parent) :
     scene->addLine(leftLine, borderPen);
     scene->addLine(rightLine, borderPen);
     scene->addLine(bottomLine, borderPen);
-    scene->addLine(centerLine);
+    //scene->addLine(centerLine);
 
     int itemCount = 1;
     for (int i = 0; i < itemCount; i++) {

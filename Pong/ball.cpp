@@ -53,6 +53,9 @@ void Ball::advance(int phase)
 {
     if (!phase) return;
 
+    //double theta = qAtan2(dy, dx);
+    //angle = theta * (180 / M_PI);
+
     setPos(mapToParent(dx * qCos(angle), dy * qSin(angle)));
 }
 

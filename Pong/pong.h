@@ -6,7 +6,7 @@
 #include <QtGui>
 #include <QtWidgets>
 
-#define WIDTH 512
+#define WIDTH 600
 #define HEIGHT (WIDTH / 2)
 
 namespace Ui {
