@@ -6,28 +6,28 @@ Settings::Settings(QWidget *parent) :
     ui(new Ui::Settings)
 {
     ui->setupUi(this);
-    numPlayers = 0;
+    numPlayers = 1;
 
     QGridLayout *layout = new QGridLayout;
     layout->setSizeConstraint(QLayout::SetFixedSize);
 
     // intro text
-    QLabel *pongLabel = new QLabel("<h1>Welcome to Pong!</h1>");
+    QLabel *pongLabel = new QLabel(tr("<h1>Welcome to Pong!</h1>"));
 
     // how many players
     onePushButton = new QPushButton(this);
-    onePushButton->setText("One");
+    onePushButton->setText(tr("One"));
     twoPushButton = new QPushButton(this);
-    twoPushButton->setText("Two");
+    twoPushButton->setText(tr("Two"));
 
     // how many ping pong balls
-    QLabel *numBallsLabel = new QLabel("How many pong balls?");
+    QLabel *numBallsLabel = new QLabel(tr("How many pong balls?"));
     numBallsBox = new QSpinBox(this);
     numBallsBox->setMinimum(1);
     numBallsBox->setMaximum(5);
 
     // play
-    QPushButton *playPushButton = new QPushButton("PLAY");
+    QPushButton *playPushButton = new QPushButton(tr("PLAY"));
 
     // clicking number of players button sets value numPlayers
     connect(onePushButton, SIGNAL(released()), this, SLOT(setPlayers1()));
@@ -42,6 +42,7 @@ Settings::Settings(QWidget *parent) :
     layout->addWidget(horizontalGroupBox, 1, 0);
     layout->addWidget(numBallsLabel, 2, 0);
     layout->addWidget(numBallsBox, 3, 0);
+    layout->addWidget(playPushButton, 4, 0);
 
     setLayout(layout);
 
@@ -80,5 +81,6 @@ void Settings::setPlayers2()
 
 void Settings::play()
 {
-
+    Pong game;
+    game.show();
 }

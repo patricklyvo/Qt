@@ -5,6 +5,7 @@
 #include <QtCore>
 #include <QtGui>
 #include <QtWidgets>
+#include "pong.h"
 
 namespace Ui {
 class Settings;
