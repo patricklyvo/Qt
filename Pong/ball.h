@@ -4,6 +4,7 @@
 #include <QPainter>
 #include <QGraphicsItem>
 #include <QGraphicsScene>
+#include "math.h"
 #include "pong.h"
 
 class Ball : public QGraphicsItem
@@ -17,8 +18,10 @@ protected:
     void advance(int phase);
 
 private:
-    qreal angle;
-    qreal speed;
+    double speed;
+    double dx;
+    double dy;
+    double angle;
     void doCollision();
 };
 

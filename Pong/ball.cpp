@@ -2,16 +2,20 @@
 
 Ball::Ball()
 {
-    // random start rotation
-    angle = (qrand() % 360);
-    setRotation(angle);
+    // random start angle, ensure ball doesn't get stuck
+    do {
+        angle = (qrand() % 360);
+    }
+    while (static_cast<int>(angle) % 90 == 0);
 
     // set the speed
     speed = 5;
+    dx = speed;
+    dy = speed;
 
-    // random start position
-    int startX = qrand() % WIDTH;
-    int startY = qrand() % HEIGHT;
+    // start from center
+    int startX = WIDTH / 2;
+    int startY = HEIGHT / 2;
 
     setPos(mapToParent(startX, startY));
 }
@@ -47,32 +51,22 @@ void Ball::advance(int phase)
 {
     if (!phase) return;
 
-    //QPointF location = this->pos();
-
-    setPos(mapToParent(0, -(speed)));
+    setPos(mapToParent(dx * qCos(angle), dy * qSin(angle)));
 }
 
 void Ball::doCollision()
 {
     // get new position
+    QPointF location = this->pos();
 
-    // change angle with randomness
-    if ((qrand() % 2)) {
-        setRotation(rotation() + (180 + (qrand() % 10)));
-    } else {
-        setRotation(rotation() + (180 + (qrand() % -10)));
+    qDebug() << "X: " << location.x() << " Y: " << location.y();
+
+    // if hitting a wall, reverse direction
+    if (location.x() <= 0 + boundingRect().width() || location.x() >= WIDTH - boundingRect().width()) {
+        dx = -dx;
     }
-
-    // check if new position is in bounds
-    QPointF newPoint = mapToParent(-(boundingRect().width()), -(boundingRect().width() + 2));
-
-    if (!scene()->sceneRect().contains(newPoint)) {
-        // move ball in bounds
-        newPoint = mapToParent(0, 0);
-    } else {
-        // set new position
-        setPos(newPoint);
+    if (location.y() <= 0 + boundingRect().height() || location.y() >= HEIGHT - boundingRect().height()) {
+        dy = -dy;
     }
-
 }
 
