@@ -13,10 +13,12 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-    pong.cpp
+    pong.cpp \
+    ball.cpp
 
 HEADERS  += \
-    pong.h
+    pong.h \
+    ball.h
 
 FORMS    += \
     pong.ui
