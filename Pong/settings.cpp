@@ -6,7 +6,7 @@ Settings::Settings(QWidget *parent) :
     ui(new Ui::Settings)
 {
     ui->setupUi(this);
-    numPlayers = 1;
+    numPlayers = 0;
 
     QGridLayout *layout = new QGridLayout;
     layout->setSizeConstraint(QLayout::SetFixedSize);
@@ -81,6 +81,10 @@ void Settings::setPlayers2()
 
 void Settings::play()
 {
-    Pong game;
-    game.show();
+    if (numPlayers == 0) {
+        QMessageBox::warning(this,"Pong","Please specify the number of players.");
+        return;
+    }
+    game = new Pong(this, numPlayers, numBallsBox->value());
+    game->show();
 }

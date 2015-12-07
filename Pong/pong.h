@@ -18,7 +18,8 @@ class Pong : public QDialog
     Q_OBJECT
 
 public:
-    explicit Pong(QWidget *parent = 0);
+    //explicit Pong(QWidget *parent = 0);
+    Pong(QWidget *parent = 0, int players = 1, int balls = 1);
     ~Pong();
 
 protected:

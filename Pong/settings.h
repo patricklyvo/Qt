@@ -29,6 +29,8 @@ private:
     QPushButton *twoPushButton;
     QSpinBox *numBallsBox;
 
+    Pong *game;
+
 public slots:
     void setPlayers1();
     void setPlayers2();
