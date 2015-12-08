@@ -1,7 +1,7 @@
 #include "pong.h"
 #include "ui_pong.h"
 
-Pong::Pong(QWidget *parent, int players, int balls) :
+Pong::Pong(QWidget *parent, int players, int speed) :
     QDialog(parent),
     ui(new Ui::Pong)
 {
@@ -9,7 +9,7 @@ Pong::Pong(QWidget *parent, int players, int balls) :
     resize(WIDTH * 1.1, HEIGHT  * 1.1);
     setWindowTitle("Pong");
 
-    qDebug() << "Players: " << players << "Balls: " << balls;
+    qDebug() << "Players: " << players << "Speed: " << speed;
 
     // set number of players
     this->players = players;
@@ -26,18 +26,18 @@ Pong::Pong(QWidget *parent, int players, int balls) :
     QPointF topCenter(scene->sceneRect().width() / 2, scene->sceneRect().height());
     QPointF bottomCenter(scene->sceneRect().width() / 2, 0);
     // using lines for collision detection
-    QLineF topLine(scene->sceneRect().topLeft(), scene->sceneRect().topRight());
-    QLineF leftLine(scene->sceneRect().topLeft(), scene->sceneRect().bottomLeft());
-    QLineF rightLine(scene->sceneRect().topRight(), scene->sceneRect().bottomRight());
-    QLineF bottomLine(scene->sceneRect().bottomLeft(), scene->sceneRect().bottomRight());
-    QLineF centerLine(topCenter, bottomCenter);
+    topLine = new QLineF(scene->sceneRect().topLeft(), scene->sceneRect().topRight());
+    leftLine = new QLineF(scene->sceneRect().topLeft(), scene->sceneRect().bottomLeft());
+    rightLine = new QLineF(scene->sceneRect().topRight(), scene->sceneRect().bottomRight());
+    bottomLine = new QLineF(scene->sceneRect().bottomLeft(), scene->sceneRect().bottomRight());
+    centerLine = new QLineF(topCenter, bottomCenter);
 
     // adding lines to scene
-    scene->addLine(topLine, borderPen);
-    scene->addLine(leftLine, borderPen);
-    scene->addLine(rightLine, borderPen);
-    scene->addLine(bottomLine, borderPen);
-    scene->addLine(centerLine);
+    scene->addLine(*topLine, borderPen);
+    scene->addLine(*leftLine, borderPen);
+    scene->addLine(*rightLine, borderPen);
+    scene->addLine(*bottomLine, borderPen);
+    scene->addLine(*centerLine);
 
     // generate paddles
     p1 = new Paddle(1);
@@ -47,17 +47,18 @@ Pong::Pong(QWidget *parent, int players, int balls) :
         scene->addItem(p2);
     }
 
-    // number of ping pong balls in game
-    for (int i = 0; i < balls; i++) {
-        Ball *item = new Ball;
-        scene->addItem(item);
-    }
+    // spawn ball and set speed
+    ball = new Ball(speed);
+    scene->addItem(ball);
 
     // timer ticks, advance notifies objects in scene to advance one/multiple steps
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), scene, SLOT(advance()));
     // timer is going off every 100ms
     timer->start(25);
+
+    // check collision
+    connect(timer, SIGNAL(timeout()), this, SLOT(ballCollision()));
 
     this->setFocus();
 }
@@ -96,6 +97,18 @@ void Pong::keyPressEvent(QKeyEvent *e)
                     break;
             default:
                     break;
+        }
+    }
+}
+
+void Pong::ballCollision()
+{
+    if (ball->collidesWithItem(p1)) {
+        ball->setDx(ball->getDx() * -1);
+    }
+    if (players > 1) {
+        if (ball->collidesWithItem(p2)) {
+            ball->setDx(ball->getDx() * -1);
         }
     }
 }

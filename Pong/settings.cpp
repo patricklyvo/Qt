@@ -21,10 +21,11 @@ Settings::Settings(QWidget *parent) :
     twoPushButton->setText(tr("Two"));
 
     // how many ping pong balls
-    QLabel *numBallsLabel = new QLabel(tr("How many pong balls?"));
-    numBallsBox = new QSpinBox(this);
-    numBallsBox->setMinimum(1);
-    numBallsBox->setMaximum(5);
+    QLabel *numBallsLabel = new QLabel(tr("Select ball speed."));
+    speedBox = new QSpinBox(this);
+    speedBox->setValue(5);
+    speedBox->setMinimum(1);
+    speedBox->setMaximum(20);
 
     // play
     QPushButton *playPushButton = new QPushButton(tr("PLAY"));
@@ -41,12 +42,12 @@ Settings::Settings(QWidget *parent) :
     layout->addWidget(pongLabel, 0, 0);
     layout->addWidget(horizontalGroupBox, 1, 0);
     layout->addWidget(numBallsLabel, 2, 0);
-    layout->addWidget(numBallsBox, 3, 0);
+    layout->addWidget(speedBox, 3, 0);
     layout->addWidget(playPushButton, 4, 0);
 
     setLayout(layout);
 
-    setWindowTitle("Pong");
+    setWindowTitle(tr("Pong"));
 }
 
 Settings::~Settings()
@@ -82,9 +83,9 @@ void Settings::setPlayers2()
 void Settings::play()
 {
     if (numPlayers == 0) {
-        QMessageBox::warning(this,"Pong","Please specify the number of players.");
+        QMessageBox::warning(this,tr("Pong"),tr("Please specify the number of players."));
         return;
     }
-    game = new Pong(this, numPlayers, numBallsBox->value());
+    game = new Pong(this, numPlayers, speedBox->value());
     game->show();
 }

@@ -27,7 +27,7 @@ private:
     QGroupBox *horizontalGroupBox;
     QPushButton *onePushButton;
     QPushButton *twoPushButton;
-    QSpinBox *numBallsBox;
+    QSpinBox *speedBox;
 
     Pong *game;
 

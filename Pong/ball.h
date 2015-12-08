@@ -4,15 +4,22 @@
 #include <QPainter>
 #include <QGraphicsItem>
 #include <QGraphicsScene>
+#include <QtWidgets>
 #include "math.h"
-#include "pong.h"
+
+#define WIDTH 600
+#define HEIGHT (WIDTH / 2)
 
 class Ball : public QGraphicsItem
 {
 public:
-    Ball();
+    Ball(int speed);
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    double getDx();
+    void setDx(double dx);
+    double getDy();
+    void setDy(double dy);
 
 protected:
     void advance(int phase);

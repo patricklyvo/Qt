@@ -1,6 +1,6 @@
 #include "ball.h"
 
-Ball::Ball()
+Ball::Ball(int speed)
 {
     // random start angle, ensure ball doesn't get stuck
     do {
@@ -9,7 +9,7 @@ Ball::Ball()
     while (static_cast<int>(angle) % 90 == 0);
 
     // set the speed
-    speed = 5;
+    this->speed = speed;
     dx = speed;
     dy = speed;
 
@@ -45,6 +45,26 @@ void Ball::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 
     painter->setBrush(brush);
     painter->drawEllipse(rec);
+}
+
+double Ball::getDx()
+{
+    return dx;
+}
+
+void Ball::setDx(double dx)
+{
+    this->dx = dx;
+}
+
+double Ball::getDy()
+{
+    return dy;
+}
+
+void Ball::setDy(double dy)
+{
+    this->dy = dy;
 }
 
 void Ball::advance(int phase)

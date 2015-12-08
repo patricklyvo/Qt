@@ -35,8 +35,19 @@ private:
     QGraphicsScene *scene;
     QTimer *timer;
     int players;
+
+    QLineF *topLine;
+    QLineF *leftLine;
+    QLineF *rightLine;
+    QLineF *bottomLine;
+    QLineF *centerLine;
+
+    Ball *ball;
     Paddle *p1;
     Paddle *p2;
+
+public slots:
+    void ballCollision();
 };
 
 #endif // PONG_H
