@@ -1,6 +1,5 @@
 #include "pong.h"
 #include "ui_pong.h"
-#include "ball.h"
 
 /*Pong::Pong(QWidget *parent) :
     QDialog(parent),
@@ -87,6 +86,14 @@ Pong::Pong(QWidget *parent, int players, int balls) :
     scene->addLine(bottomLine, borderPen);
     scene->addLine(centerLine);
 
+    // generate paddles
+    Paddle *p1 = new Paddle(1);
+    scene->addItem(p1);
+    if (players == 2) {
+        Paddle *p2 = new Paddle(2);
+        scene->addItem(p2);
+    }
+
     // number of ping pong balls in game
     for (int i = 0; i < balls; i++) {
         Ball *item = new Ball;
@@ -103,33 +110,5 @@ Pong::Pong(QWidget *parent, int players, int balls) :
 Pong::~Pong()
 {
     delete ui;
-}
-
-void Pong::keyPressEvent(QKeyEvent *e)
-{
-        int p1 = 0;
-        int p2 = 0;
-
-        switch(e->key()) {
-
-        case (Qt::Key_Up):
-                p1 = -1;
-                break;
-        case (Qt::Key_Down):
-                p1 = 1;
-                break;
-        case (Qt::Key_W):
-                p2 = -1;
-                break;
-        case (Qt::Key_S):
-                p2 = 1;
-                break;
-        default:
-                p1 = 0;
-                p2 = 0;
-                break;
-        }
-
-        // move paddles
 }
 
