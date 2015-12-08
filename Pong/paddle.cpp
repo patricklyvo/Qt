@@ -8,11 +8,11 @@ Paddle::Paddle(int playerNum)
     int startX;
     int startY;
     if (playerNum == 1) {
-        startX = (PADDLE_WIDTH * 2);
+        startX = PADDLE_WIDTH;
     } else {
         startX = (WIDTH - (PADDLE_WIDTH * 2));
     }
-    startY = ((HEIGHT - PADDLE_WIDTH) / 2);
+    startY = ((HEIGHT - PADDLE_HEIGHT) / 2);
 
     setPos(mapToParent(startX, startY));
 }
