@@ -12,6 +12,7 @@
 #define HEIGHT (WIDTH / 2)
 #define PADDLE_WIDTH (WIDTH * 0.025)
 #define PADDLE_HEIGHT (HEIGHT / 4)
+#define PADDLE_SPEED (HEIGHT * 0.05)
 
 namespace Ui {
 class Pong;
@@ -26,11 +27,16 @@ public:
     Pong(QWidget *parent = 0, int players = 1, int balls = 1);
     ~Pong();
 
+protected:
+    void keyPressEvent(QKeyEvent *e);
+
 private:
     Ui::Pong *ui;
     QGraphicsScene *scene;
     QTimer *timer;
     int players;
+    Paddle *p1;
+    Paddle *p2;
 };
 
 #endif // PONG_H

@@ -4,8 +4,11 @@
 #include <QPainter>
 #include <QGraphicsItem>
 #include <QGraphicsScene>
-#include "math.h"
-#include "pong.h"
+
+#define WIDTH 600
+#define HEIGHT (WIDTH / 2)
+#define PADDLE_WIDTH (WIDTH * 0.025)
+#define PADDLE_HEIGHT (HEIGHT / 4)
 
 class Paddle : public QGraphicsItem
 {
@@ -14,11 +17,8 @@ public:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
-protected:
-    void keyPressEvent(QKeyEvent *e);
-
 private:
-    double speed;
+    int player;
 };
 
 #endif // PADDLE_H

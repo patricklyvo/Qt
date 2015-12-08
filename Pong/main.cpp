@@ -9,8 +9,5 @@ int main(int argc, char *argv[])
     Settings config;
     config.show();
 
-    //Pong game;
-    //game.show();
-
     return a.exec();
 }

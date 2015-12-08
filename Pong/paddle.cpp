@@ -2,12 +2,12 @@
 
 Paddle::Paddle(int playerNum)
 {
-    speed = 5;
+    this->player = playerNum;
 
     // starting position for paddles
     int startX;
     int startY;
-    if (playerNum == 1) {
+    if (player == 1) {
         startX = PADDLE_WIDTH;
     } else {
         startX = (WIDTH - (PADDLE_WIDTH * 2));
@@ -29,33 +29,4 @@ void Paddle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 
     painter->fillRect(rec, brush);
     painter->drawRect(rec);
-}
-
-void Paddle::keyPressEvent(QKeyEvent *e)
-{
-        int p1 = 0;
-        int p2 = 0;
-
-        switch(e->key()) {
-
-        case (Qt::Key_Up):
-                p1 = -1;
-                break;
-        case (Qt::Key_Down):
-                p1 = 1;
-                break;
-        case (Qt::Key_W):
-                p2 = -1;
-                break;
-        case (Qt::Key_S):
-                p2 = 1;
-                break;
-        default:
-                p1 = 0;
-                p2 = 0;
-                break;
-        }
-
-        // move paddles
-        setPos(mapToParent(0, p1));
 }

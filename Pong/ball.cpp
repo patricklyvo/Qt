@@ -43,8 +43,6 @@ void Ball::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
         doCollision();
     }
 
-    //painter->fillRect(rec, brush);
-    //painter->drawRect(rec);
     painter->setBrush(brush);
     painter->drawEllipse(rec);
 }
@@ -64,7 +62,7 @@ void Ball::doCollision()
     // get new position
     QPointF location = this->pos();
 
-    qDebug() << "X: " << location.x() << " Y: " << location.y();
+    //qDebug() << "X: " << location.x() << " Y: " << location.y();
 
     // if hitting a wall, reverse direction
     if (location.x() <= 0 + boundingRect().width() || location.x() >= WIDTH - boundingRect().width()) {
