@@ -68,35 +68,29 @@ Pong::~Pong()
     delete ui;
 }
 
+// moving paddles
 void Pong::keyPressEvent(QKeyEvent *e)
 {
-    if (players == 1) {
-        switch(e->key()) {
-            case Qt::Key_W:
-                    p1->moveBy(0, (-1 * PADDLE_SPEED));
-                    break;
-            case Qt::Key_S:
-                    p1->moveBy(0, (1 * PADDLE_SPEED));
-                    break;
-            default:
-                    break;
+    // single player
+    QPointF p1Pos = p1->pos();
+
+    if (e->key() == Qt::Key_W && (p1Pos.y() - PADDLE_SPEED) > 0) {
+        p1->moveBy(0, (-1 * PADDLE_SPEED));
+    }
+    else if (e->key() == Qt::Key_S && (p1Pos.y() + PADDLE_SPEED) < (HEIGHT - PADDLE_HEIGHT)) {
+        p1->moveBy(0, PADDLE_SPEED);
+        qDebug() << p1->pos();
+    }
+
+    // if two players
+    if (players  == 2) {
+        QPointF p2Pos = p2->pos();
+
+        if (e->key() == Qt::Key_8 && (p2Pos.y() - PADDLE_SPEED) > 0) {
+            p2->moveBy(0, (-1 * PADDLE_SPEED));
         }
-    } else {
-        switch(e->key()) {
-            case Qt::Key_8:
-                    p2->moveBy(0, (-1 * PADDLE_SPEED));
-                    break;
-            case Qt::Key_5:
-                    p2->moveBy(0, (1 * PADDLE_SPEED));
-                    break;
-            case Qt::Key_W:
-                    p1->moveBy(0, (-1 * PADDLE_SPEED));
-                    break;
-            case Qt::Key_S:
-                    p1->moveBy(0, (1 * PADDLE_SPEED));
-                    break;
-            default:
-                    break;
+        else if (e->key() == Qt::Key_5 && (p2Pos.y() + PADDLE_SPEED) < (HEIGHT - PADDLE_HEIGHT)) {
+            p2->moveBy(0, PADDLE_SPEED);
         }
     }
 }
