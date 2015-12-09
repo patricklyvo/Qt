@@ -26,9 +26,9 @@ protected:
 
 private:
     int diameter;
-    double speed;
     double dx;
     double dy;
+    int hits;
 };
 
 #endif // BALL_H

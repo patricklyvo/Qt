@@ -51,6 +51,8 @@ private:
     Paddle *p1;
     Paddle *p2;
 
+    void reset();
+
 public slots:
     void ballCollision();
 };

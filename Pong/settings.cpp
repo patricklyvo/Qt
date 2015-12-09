@@ -86,6 +86,6 @@ void Settings::play()
         QMessageBox::warning(this,tr("Pong"),tr("Please specify the number of players."));
         return;
     }
-    game = new Pong(this, numPlayers, speedBox->value());
+    Pong *game = new Pong(this, numPlayers, speedBox->value());
     game->show();
 }

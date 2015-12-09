@@ -2,6 +2,9 @@
 
 Ball::Ball(int speed)
 {
+    // number of times ball has been hit
+    hits = 0;
+
     // diameter of ball
     diameter = 20;
 
@@ -43,6 +46,17 @@ void Ball::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     QRectF rec = boundingRect();
     QBrush brush(Qt::gray);
 
+    // change ball color as round goes on
+    if (hits > 15) {
+        brush.setColor(Qt::red);
+    }
+    else if (hits > 10) {
+        brush.setColor("orange");
+    }
+    else if (hits > 5) {
+        brush.setColor(Qt::yellow);
+    }
+
     painter->setBrush(brush);
     painter->drawEllipse(rec);
 }
@@ -60,6 +74,13 @@ double Ball::getDx()
 void Ball::setDx(double dx)
 {
     this->dx = dx;
+    hits++;
+
+    // increase speed
+    if ((hits > 0) && (hits % 5 == 0)) {
+        this->dx = this->dx * 1.1;
+        dy = dy * 1.1;
+    }
 }
 
 double Ball::getDy()
@@ -77,5 +98,7 @@ void Ball::advance(int phase)
     if (!phase) return;
 
     setPos(mapToParent(dx, dy));
+
+    //qDebug() << "hits: " << hits << " dx: " << dx << " dy: " << dy;
 }
 

@@ -60,7 +60,7 @@ Pong::Pong(QWidget *parent, int players, int speed) :
     // timer ticks, advance notifies objects in scene to advance one/multiple steps
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), scene, SLOT(advance()));
-    // timer is going off every 100ms
+    // timer is going off every 25ms
     timer->start(25);
 
     // check collision
@@ -100,16 +100,35 @@ void Pong::keyPressEvent(QKeyEvent *e)
     }
 }
 
+void Pong::reset()
+{
+    scene->removeItem(ball);
+    ball = new Ball(speed);
+    scene->addItem(ball);
+}
+
 void Pong::ballCollision()
 {
     QPointF ballPos = ball->pos();
+    QPointF p1Pos = p1->pos();
 
-    // collision with paddles
-    if (ball->collidesWithItem(p1)) {
+    // ball passes p1 paddle or collides w/ p1 paddle
+    QPointF p2Pos = p2->pos();
+    qDebug() << "p1: " << p1Pos << " p2: " << p2Pos << " ball: " << ballPos;
+    if (ballPos.x() < (p1Pos.x() + PADDLE_WIDTH - speed)) {
+        reset();
+    }
+    else if (ball->collidesWithItem(p1)) {
         ball->setDx(ball->getDx() * -1);
     }
+
+    // ball passes p2 paddle or collides w/ p2 paddle
     if (players == 2) {
-        if (ball->collidesWithItem(p2)) {
+        QPointF p2Pos = p2->pos();
+        if ((ballPos.x() + ball->getDiameter()) > (p2Pos.x() + speed)) {
+            reset();
+        }
+        else if (ball->collidesWithItem(p2)) {
             ball->setDx(ball->getDx() * -1);
         }
     }
@@ -117,11 +136,5 @@ void Pong::ballCollision()
     // collision with top and bottom walls
     if ((ballPos.y() <= 0) || ((ballPos.y() + ball->getDiameter()) >= HEIGHT)) {
         ball->setDy(ball->getDy() * -1);
-    }
-
-    // ball hits left and right walls
-    if ((ballPos.x() <= 0) || ((ballPos.x() + ball->getDiameter()) >= WIDTH)) {
-        ball = new Ball(speed);
-        scene->addItem(ball);
     }
 }

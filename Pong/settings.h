@@ -29,7 +29,7 @@ private:
     QPushButton *twoPushButton;
     QSpinBox *speedBox;
 
-    Pong *game;
+    //Pong *game;
 
 public slots:
     void setPlayers1();
