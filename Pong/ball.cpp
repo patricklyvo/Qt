@@ -32,14 +32,24 @@ void Ball::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     QBrush brush(Qt::gray);
 
     // basic collision detection
-    if (scene()->collidingItems(this).isEmpty()) {
+    /*if (scene()->collidingItems(this).isEmpty()) {
         // no collision
         brush.setColor(Qt::green);
     } else {
-        // collision
-        brush.setColor(Qt::red);
+        // collision excluding center line
+        foreach(QGraphicsItem *item, scene()->collidingItems(this)) {
+            if (item->pos() != QPointF(0,0)) {
+                brush.setColor(Qt::red);
+                qDebug() << item->pos();
+            }
+        }
 
         // set position
+        doCollision();
+    }*/
+
+    // collision detection
+    if (!scene()->collidingItems(this).isEmpty()) {
         doCollision();
     }
 

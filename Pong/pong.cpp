@@ -23,21 +23,26 @@ Pong::Pong(QWidget *parent, int players, int speed) :
 
     QPen borderPen = QPen(Qt::black);
 
-    QPointF topCenter(scene->sceneRect().width() / 2, scene->sceneRect().height());
-    QPointF bottomCenter(scene->sceneRect().width() / 2, 0);
+    // center line points
+    topCenter = new QPointF(scene->sceneRect().width() / 2, scene->sceneRect().height());
+    bottomCenter = new QPointF(scene->sceneRect().width() / 2, 0);
+
     // using lines for collision detection
     topLine = new QLineF(scene->sceneRect().topLeft(), scene->sceneRect().topRight());
     leftLine = new QLineF(scene->sceneRect().topLeft(), scene->sceneRect().bottomLeft());
     rightLine = new QLineF(scene->sceneRect().topRight(), scene->sceneRect().bottomRight());
     bottomLine = new QLineF(scene->sceneRect().bottomLeft(), scene->sceneRect().bottomRight());
-    centerLine = new QLineF(topCenter, bottomCenter);
+    centerLine = new QLineF(*topCenter, *bottomCenter);
 
     // adding lines to scene
     scene->addLine(*topLine, borderPen);
     scene->addLine(*leftLine, borderPen);
     scene->addLine(*rightLine, borderPen);
     scene->addLine(*bottomLine, borderPen);
-    scene->addLine(*centerLine);
+
+    // adding center line to scene
+    borderPen = QPen(Qt::black, 1, Qt::DashLine);
+    scene->addLine(*centerLine, borderPen);
 
     // generate paddles
     p1 = new Paddle(1);
@@ -60,7 +65,7 @@ Pong::Pong(QWidget *parent, int players, int speed) :
     // check collision
     connect(timer, SIGNAL(timeout()), this, SLOT(ballCollision()));
 
-    this->setFocus();
+    //this->setFocus();
 }
 
 Pong::~Pong()
@@ -79,7 +84,6 @@ void Pong::keyPressEvent(QKeyEvent *e)
     }
     else if (e->key() == Qt::Key_S && (p1Pos.y() + PADDLE_SPEED) < (HEIGHT - PADDLE_HEIGHT)) {
         p1->moveBy(0, PADDLE_SPEED);
-        qDebug() << p1->pos();
     }
 
     // if two players
@@ -97,10 +101,11 @@ void Pong::keyPressEvent(QKeyEvent *e)
 
 void Pong::ballCollision()
 {
+    // collision with paddles
     if (ball->collidesWithItem(p1)) {
         ball->setDx(ball->getDx() * -1);
     }
-    if (players > 1) {
+    if (players == 2) {
         if (ball->collidesWithItem(p2)) {
             ball->setDx(ball->getDx() * -1);
         }

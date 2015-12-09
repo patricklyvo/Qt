@@ -36,6 +36,9 @@ private:
     QTimer *timer;
     int players;
 
+    QPointF *topCenter;
+    QPointF *bottomCenter;
+
     QLineF *topLine;
     QLineF *leftLine;
     QLineF *rightLine;
