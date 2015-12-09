@@ -16,20 +16,19 @@ public:
     Ball(int speed);
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    int getDiameter();
     double getDx();
     void setDx(double dx);
     double getDy();
     void setDy(double dy);
-
 protected:
     void advance(int phase);
 
 private:
+    int diameter;
     double speed;
     double dx;
     double dy;
-    double angle;
-    void doCollision();
 };
 
 #endif // BALL_H

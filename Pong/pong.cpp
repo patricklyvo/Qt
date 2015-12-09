@@ -53,7 +53,8 @@ Pong::Pong(QWidget *parent, int players, int speed) :
     }
 
     // spawn ball and set speed
-    ball = new Ball(speed);
+    this->speed = speed;
+    ball = new Ball(this->speed);
     scene->addItem(ball);
 
     // timer ticks, advance notifies objects in scene to advance one/multiple steps
@@ -101,6 +102,8 @@ void Pong::keyPressEvent(QKeyEvent *e)
 
 void Pong::ballCollision()
 {
+    QPointF ballPos = ball->pos();
+
     // collision with paddles
     if (ball->collidesWithItem(p1)) {
         ball->setDx(ball->getDx() * -1);
@@ -109,5 +112,16 @@ void Pong::ballCollision()
         if (ball->collidesWithItem(p2)) {
             ball->setDx(ball->getDx() * -1);
         }
+    }
+
+    // collision with top and bottom walls
+    if ((ballPos.y() <= 0) || ((ballPos.y() + ball->getDiameter()) >= HEIGHT)) {
+        ball->setDy(ball->getDy() * -1);
+    }
+
+    // ball hits left and right walls
+    if ((ballPos.x() <= 0) || ((ballPos.x() + ball->getDiameter()) >= WIDTH)) {
+        ball = new Ball(speed);
+        scene->addItem(ball);
     }
 }

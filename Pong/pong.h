@@ -46,6 +46,8 @@ private:
     QLineF *centerLine;
 
     Ball *ball;
+    int speed;
+
     Paddle *p1;
     Paddle *p2;
 
