@@ -86,6 +86,9 @@ void Settings::play()
         QMessageBox::warning(this,tr("Pong"),tr("Please specify the number of players."));
         return;
     }
+
+    // start pong game and delete it when closed
     Pong *game = new Pong(this, numPlayers, speedBox->value()+5);
+    game->setAttribute(Qt::WA_DeleteOnClose, true);
     game->show();
 }

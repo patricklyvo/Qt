@@ -99,6 +99,6 @@ void Ball::advance(int phase)
 
     setPos(mapToParent(dx, dy));
 
-    //qDebug() << "hits: " << hits << " dx: " << dx << " dy: " << dy;
+    qDebug() << "hits: " << hits << " dx: " << dx << " dy: " << dy;
 }
 
