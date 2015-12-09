@@ -23,9 +23,9 @@ Settings::Settings(QWidget *parent) :
     // how many ping pong balls
     QLabel *numBallsLabel = new QLabel(tr("Select ball speed."));
     speedBox = new QSpinBox(this);
-    speedBox->setValue(5);
+    speedBox->setValue(1);
     speedBox->setMinimum(1);
-    speedBox->setMaximum(20);
+    speedBox->setMaximum(5);
 
     // play
     QPushButton *playPushButton = new QPushButton(tr("PLAY"));
@@ -86,6 +86,6 @@ void Settings::play()
         QMessageBox::warning(this,tr("Pong"),tr("Please specify the number of players."));
         return;
     }
-    Pong *game = new Pong(this, numPlayers, speedBox->value());
+    Pong *game = new Pong(this, numPlayers, speedBox->value()+5);
     game->show();
 }

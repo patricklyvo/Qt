@@ -114,21 +114,39 @@ void Pong::ballCollision()
 
     // ball passes p1 paddle or collides w/ p1 paddle
     QPointF p2Pos = p2->pos();
-    qDebug() << "p1: " << p1Pos << " p2: " << p2Pos << " ball: " << ballPos;
-    if (ballPos.x() < (p1Pos.x() + PADDLE_WIDTH - speed)) {
+    //qDebug() << "p1: " << p1Pos << " p2: " << p2Pos << " ball: " << ballPos;
+    if (ballPos.x() < (p1Pos.x() + PADDLE_WIDTH - abs(ball->getDx()))) {
         reset();
     }
     else if (ball->collidesWithItem(p1)) {
+        if ((ballPos.y() < (p1Pos.y() + (PADDLE_HEIGHT * 0.3))) && (ball->getDy() >= 0)) {
+            ball->setDy(abs(ball->getDx()) * -1);
+        }
+        else if ((ballPos.y() > (p1Pos.y() + (PADDLE_HEIGHT * 0.65))) && (ball->getDy() <= 0)) {
+            ball->setDy(abs(ball->getDx()));
+        }
+        else {
+            ball->setDy(ball->getDy() * 0.8);
+        }
         ball->setDx(ball->getDx() * -1);
     }
 
     // ball passes p2 paddle or collides w/ p2 paddle
     if (players == 2) {
         QPointF p2Pos = p2->pos();
-        if ((ballPos.x() + ball->getDiameter()) > (p2Pos.x() + speed)) {
+        if ((ballPos.x() + ball->getDiameter()) > (p2Pos.x() + abs(ball->getDx()))) {
             reset();
         }
         else if (ball->collidesWithItem(p2)) {
+            if ((ballPos.y() < (p2Pos.y() + (PADDLE_HEIGHT * 0.3))) && (ball->getDy() >= 0)) {
+                ball->setDy(abs(ball->getDx()) * -1);
+            }
+            else if ((ballPos.y() > (p2Pos.y() + (PADDLE_HEIGHT * 0.65))) && (ball->getDy() <= 0)) {
+                ball->setDy(abs(ball->getDx()));
+            }
+            else {
+                ball->setDy(ball->getDy() * 0.8);
+            }
             ball->setDx(ball->getDx() * -1);
         }
     }
