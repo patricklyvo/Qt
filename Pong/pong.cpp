@@ -6,7 +6,7 @@ Pong::Pong(QWidget *parent, int players, int speed) :
     ui(new Ui::Pong)
 {
     ui->setupUi(this);
-    resize(WIDTH * 1.1, HEIGHT  * 1.1);
+    resize(WIDTH * 1.1, HEIGHT  * 1.25);
     setWindowTitle("Pong");
 
     qDebug() << "Players: " << players << "Speed: " << speed;
@@ -44,12 +44,31 @@ Pong::Pong(QWidget *parent, int players, int speed) :
     borderPen = QPen(Qt::black, 1, Qt::DashLine);
     scene->addLine(*centerLine, borderPen);
 
+    // font for text
+    QFont font;
+    font.setPixelSize(20);
+    font.setBold(false);
+    font.setFamily("Calibri");
+
     // generate paddles
     p1 = new Paddle(1);
     scene->addItem(p1);
+    p1Score = 0;
+    p1Text = new QGraphicsTextItem;
+    p1Text->setPos((WIDTH / 5), -30);
+    p1Text->setFont(font);
+    p1Text->setPlainText(QString::number(p1Score));
+    scene->addItem(p1Text);
+
     if (players == 2) {
         p2 = new Paddle(2);
         scene->addItem(p2);
+        p2Score = 0;
+        p2Text = new QGraphicsTextItem;
+        p2Text->setPos((WIDTH - (WIDTH / 5)), -30);
+        p2Text->setFont(font);
+        p2Text->setPlainText(QString::number(p2Score));
+        scene->addItem(p2Text);
     }
 
     // spawn ball and set speed
@@ -104,7 +123,26 @@ void Pong::reset()
 {
     scene->removeItem(ball);
     ball = new Ball(speed);
-    scene->addItem(ball);
+
+    // if there is a winner, game stops
+    if (p1Score > 10 || p2Score > 10) {
+        QFont font;
+        font.setPixelSize(30);
+        font.setBold(false);
+        font.setFamily("Calibri");
+
+        QGraphicsTextItem *winnerText = new QGraphicsTextItem;
+        winnerText->setPos(((WIDTH / 2) - 100),((HEIGHT / 2) - 25));
+        winnerText->setFont(font);
+        if (p1Score > p2Score) {
+            winnerText->setPlainText(tr("PLAYER 1 WINS!"));
+        } else {
+            winnerText->setPlainText(tr("PLAYER 2 WINS!"));
+        }
+        scene->addItem(winnerText);
+    } else {
+        scene->addItem(ball);
+    }
 }
 
 void Pong::ballCollision()
@@ -113,9 +151,9 @@ void Pong::ballCollision()
     QPointF p1Pos = p1->pos();
 
     // ball passes p1 paddle or collides w/ p1 paddle
-    QPointF p2Pos = p2->pos();
-    //qDebug() << "p1: " << p1Pos << " p2: " << p2Pos << " ball: " << ballPos;
     if (ballPos.x() < (p1Pos.x() + PADDLE_WIDTH - abs(ball->getDx()))) {
+        if (players == 2) ++p2Score;
+        p2Text->setPlainText(QString::number(p2Score));
         reset();
     }
     else if (ball->collidesWithItem(p1)) {
@@ -135,6 +173,8 @@ void Pong::ballCollision()
     if (players == 2) {
         QPointF p2Pos = p2->pos();
         if ((ballPos.x() + ball->getDiameter()) > (p2Pos.x() + abs(ball->getDx()))) {
+            ++p1Score;
+            p1Text->setPlainText(QString::number(p1Score));
             reset();
         }
         else if (ball->collidesWithItem(p2)) {

@@ -35,6 +35,11 @@ private:
     QGraphicsScene *scene;
     QTimer *timer;
     int players;
+    int p1Score;
+    int p2Score;
+
+    QGraphicsTextItem *p1Text;
+    QGraphicsTextItem *p2Text;
 
     QPointF *topCenter;
     QPointF *bottomCenter;

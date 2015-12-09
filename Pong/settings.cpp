@@ -87,6 +87,12 @@ void Settings::play()
         return;
     }
 
+    // temporary
+    if (numPlayers == 1) {
+        QMessageBox::warning(this,tr("Pong"),tr("Single player mode coming soon..."));
+        return;
+    }
+
     // start pong game and delete it when closed
     Pong *game = new Pong(this, numPlayers, speedBox->value()+5);
     game->setAttribute(Qt::WA_DeleteOnClose, true);
