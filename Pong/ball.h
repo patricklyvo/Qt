@@ -13,13 +13,13 @@
 class Ball : public QGraphicsItem
 {
 public:
-    Ball(int speed);
+    explicit Ball(int speed = 5);
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     int getDiameter();
-    double getDx();
+    double getDx() const;
     void setDx(double dx);
-    double getDy();
+    double getDy() const;
     void setDy(double dy);
 protected:
     void advance(int phase);

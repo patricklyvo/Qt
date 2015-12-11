@@ -66,7 +66,7 @@ int Ball::getDiameter()
     return this->diameter;
 }
 
-double Ball::getDx()
+double Ball::getDx() const
 {
     return dx;
 }
@@ -83,7 +83,7 @@ void Ball::setDx(double dx)
     }
 }
 
-double Ball::getDy()
+double Ball::getDy() const
 {
     return dy;
 }
