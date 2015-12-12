@@ -2,6 +2,8 @@
 #define DIALOG_H
 
 #include <QDialog>
+#include <QtSql>
+#include <QtDebug>
 
 namespace Ui {
 class Dialog;
