@@ -1,6 +1,13 @@
 #include "dialog.h"
 #include "ui_dialog.h"
 
+struct excel {
+    int columnCount;
+    QString columnName = "";
+    QVector<QString> columns[1];
+    QVector<QVector<QString>> data;
+};
+
 Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Dialog)
@@ -8,23 +15,34 @@ Dialog::Dialog(QWidget *parent) :
     ui->setupUi(this);
 
     // setting up QSqlDatabase with QODBC to read excel worksheet
-    QSqlDatabase excel = QSqlDatabase::addDatabase("QODBC");
+    QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
     //excel.setDatabaseName("DRIVER={Microsoft Excel Driver (*.xlsx)};DBQ=" + QString("C:\Temp\Sample.xlsx"));
-    excel.setDatabaseName("exceldsn64");
+    db.setDatabaseName("exceldsn64");
 
-    if (excel.open()) {
-        qDebug() << "Opened.";
+    if (db.open()) {
+        qDebug() << "Opened worksheet succesfully!";
 
-        QSqlQuery query("select * from [" + QString("Sheet1") + "$A1:A9]"); // Select range, place A1:B5 after $
-        while (query.next()) {
-            QString column1= query.value(0).toString();
-            qDebug() << column1;
+        QSqlQuery query("select * from [" + QString("Sheet1") + "$A1:B9]"); // Select range, place A1:B5 after $
+
+        qDebug() << "Columns: " << query.record().count();
+
+        for (int i = 0; i < query.record().count(); i++) {
+            qDebug() << "Column Name: " << query.record().fieldName(i);
+            while (query.next()) {
+                QString column1 = query.value(i).toString();
+                qDebug() << column1;
+            }
         }
 
-        excel.close();
+        /*while (query.next()) {
+            QString column1 = query.value(0).toString();
+            qDebug() << column1;
+        }*/
+
+        db.close();
     } else {
         // if file cound't be opened, output last error that occured on the database
-        qDebug() << excel.lastError().text();
+        qDebug() << db.lastError().text();
     }
 }
 
