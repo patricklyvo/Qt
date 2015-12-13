@@ -1,13 +1,6 @@
 #include "dialog.h"
 #include "ui_dialog.h"
 
-struct excel {
-    int columnCount;
-    QString columnName = "";
-    QVector<QString> columns[1];
-    QVector<QVector<QString>> data;
-};
-
 Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Dialog)
@@ -22,22 +15,33 @@ Dialog::Dialog(QWidget *parent) :
     if (db.open()) {
         qDebug() << "Opened worksheet succesfully!";
 
-        QSqlQuery query("select * from [" + QString("Sheet1") + "$A1:B9]"); // Select range, place A1:B5 after $
+        QSqlQuery query("select * from [" + QString("Sheet1") + "$A1:G44]"); // Select range, place A1:B5 after $
 
-        qDebug() << "Columns: " << query.record().count();
+        int columnCount = query.record().count();
+        QVector<QString> columnNames;
+        QVector< QVector<QString> > data(columnCount);
 
-        for (int i = 0; i < query.record().count(); i++) {
-            qDebug() << "Column Name: " << query.record().fieldName(i);
-            while (query.next()) {
-                QString column1 = query.value(i).toString();
-                qDebug() << column1;
+        for (int i = 0; i < columnCount; i++) {
+            columnNames.push_back(query.record().fieldName(i));
+        }
+
+        while (query.next()) {
+            //QString column1 = query.value(0).toString();
+            //QString column2 = query.value(1).toString();
+            //qDebug() << column1 << " " << column2;
+            for (int j = 0; j < columnCount; j++) {
+                data[j].push_back(query.value(j).toString());
             }
         }
 
-        /*while (query.next()) {
-            QString column1 = query.value(0).toString();
-            qDebug() << column1;
-        }*/
+        // verify information
+        qDebug() << "Columns: " << columnCount;
+        for (int k = 0; k < columnCount; k++) {
+            qDebug() << "Column Name: " << columnNames[k];
+            for (int l = 0; l < data[k].size(); l++) {
+                qDebug() << data[k][l];
+            }
+        }
 
         db.close();
     } else {
