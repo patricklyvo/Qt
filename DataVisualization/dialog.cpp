@@ -9,39 +9,31 @@ Dialog::Dialog(QWidget *parent) :
 
     // setting up QSqlDatabase with QODBC to read excel worksheet
     QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
-    //excel.setDatabaseName("DRIVER={Microsoft Excel Driver (*.xlsx)};DBQ=" + QString("C:\Temp\Sample.xlsx"));
     db.setDatabaseName("exceldsn64");
 
     if (db.open()) {
         qDebug() << "Opened worksheet succesfully!";
 
-        QSqlQuery query("select * from [" + QString("Sheet1") + "$A1:G44]"); // Select range, place A1:B5 after $
+        QSqlQuery query("select * from [" + QString("Sheet1") + "$A1:A44]"); // Select range, place A1:B5 after $
 
         int columnCount = query.record().count();
         QVector<QString> columnNames;
         QVector< QVector<QString> > data(columnCount);
 
+        // store column names
         for (int i = 0; i < columnCount; i++) {
             columnNames.push_back(query.record().fieldName(i));
         }
 
+        // store data
         while (query.next()) {
-            //QString column1 = query.value(0).toString();
-            //QString column2 = query.value(1).toString();
-            //qDebug() << column1 << " " << column2;
             for (int j = 0; j < columnCount; j++) {
                 data[j].push_back(query.value(j).toString());
             }
         }
 
         // verify information
-        qDebug() << "Columns: " << columnCount;
-        for (int k = 0; k < columnCount; k++) {
-            qDebug() << "Column Name: " << columnNames[k];
-            for (int l = 0; l < data[k].size(); l++) {
-                qDebug() << data[k][l];
-            }
-        }
+        printExcel(columnNames, data);
 
         db.close();
     } else {
@@ -53,4 +45,19 @@ Dialog::Dialog(QWidget *parent) :
 Dialog::~Dialog()
 {
     delete ui;
+}
+
+// prints stored excel data
+void Dialog::printExcel(const QVector<QString> &columnNames, const QVector<QVector<QString> > &data)
+{
+    int numColumns = columnNames.size();
+    qDebug() << "Columns: " << numColumns;
+
+    for (int i = 0; i < numColumns; i++) {
+        qDebug() << "Column Name: " << columnNames[i];
+
+        for (int j = 0; j < data[i].size(); j++) {
+            qDebug() << data[i][j];
+        }
+    }
 }

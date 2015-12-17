@@ -16,6 +16,7 @@ class Dialog : public QDialog
 public:
     explicit Dialog(QWidget *parent = 0);
     ~Dialog();
+    void printExcel(const QVector<QString> &columnNames, const QVector<QVector<QString> > &data);
 
 private:
     Ui::Dialog *ui;
