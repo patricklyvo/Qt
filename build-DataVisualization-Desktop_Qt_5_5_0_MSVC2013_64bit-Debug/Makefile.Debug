@@ -1920,15 +1920,25 @@ debug\dialog.obj: ..\DataVisualization\dialog.cpp ../DataVisualization/dialog.h 
 		C:\Qt\5.5\msvc2013_64\include\QtGui\qinputmethod.h \
 		C:\Qt\5.5\msvc2013_64\include\QtWidgets\QButtonGroup \
 		C:\Qt\5.5\msvc2013_64\include\QtWidgets\qbuttongroup.h \
+		C:\Qt\5.5\msvc2013_64\include\QtWidgets\QComboBox \
 		C:\Qt\5.5\msvc2013_64\include\QtWidgets\QHeaderView \
 		C:\Qt\5.5\msvc2013_64\include\QtWidgets\qheaderview.h \
+		C:\Qt\5.5\msvc2013_64\include\QtWidgets\QLabel \
+		C:\Qt\5.5\msvc2013_64\include\QtWidgets\qlabel.h \
+		C:\Qt\5.5\msvc2013_64\include\QtWidgets\QLineEdit \
+		C:\Qt\5.5\msvc2013_64\include\QtWidgets\qlineedit.h \
+		C:\Qt\5.5\msvc2013_64\include\QtGui\qtextcursor.h \
+		C:\Qt\5.5\msvc2013_64\include\QtGui\qtextformat.h \
+		C:\Qt\5.5\msvc2013_64\include\QtGui\qpen.h \
+		C:\Qt\5.5\msvc2013_64\include\QtGui\qtextoption.h \
+		C:\Qt\5.5\msvc2013_64\include\QtWidgets\QPushButton \
+		C:\Qt\5.5\msvc2013_64\include\QtWidgets\qpushbutton.h \
+		C:\Qt\5.5\msvc2013_64\include\QtWidgets\qabstractbutton.h \
 		../DataVisualization/qcustomplot.h \
 		C:\Qt\5.5\msvc2013_64\include\QtCore\QPointer \
 		C:\Qt\5.5\msvc2013_64\include\QtWidgets\QWidget \
 		C:\Qt\5.5\msvc2013_64\include\QtGui\QPainter \
 		C:\Qt\5.5\msvc2013_64\include\QtGui\qpainter.h \
-		C:\Qt\5.5\msvc2013_64\include\QtGui\qtextoption.h \
-		C:\Qt\5.5\msvc2013_64\include\QtGui\qpen.h \
 		C:\Qt\5.5\msvc2013_64\include\QtGui\QPaintEvent \
 		C:\Qt\5.5\msvc2013_64\include\QtGui\QMouseEvent \
 		C:\Qt\5.5\msvc2013_64\include\QtGui\QPixmap \
@@ -2028,11 +2038,9 @@ debug\dialog.obj: ..\DataVisualization\dialog.cpp ../DataVisualization/dialog.h 
 		C:\Qt\5.5\msvc2013_64\include\QtGui\qpdfwriter.h \
 		C:\Qt\5.5\msvc2013_64\include\QtGui\qabstracttextdocumentlayout.h \
 		C:\Qt\5.5\msvc2013_64\include\QtGui\qtextlayout.h \
-		C:\Qt\5.5\msvc2013_64\include\QtGui\qtextformat.h \
 		C:\Qt\5.5\msvc2013_64\include\QtGui\qglyphrun.h \
 		C:\Qt\5.5\msvc2013_64\include\QtGui\qrawfont.h \
 		C:\Qt\5.5\msvc2013_64\include\QtGui\qfontdatabase.h \
-		C:\Qt\5.5\msvc2013_64\include\QtGui\qtextcursor.h \
 		C:\Qt\5.5\msvc2013_64\include\QtGui\qtextdocument.h \
 		C:\Qt\5.5\msvc2013_64\include\QtGui\qstatictext.h \
 		C:\Qt\5.5\msvc2013_64\include\QtGui\qsyntaxhighlighter.h \
@@ -2059,7 +2067,6 @@ debug\dialog.obj: ..\DataVisualization\dialog.cpp ../DataVisualization/dialog.h 
 		C:\Qt\5.5\msvc2013_64\include\QtWidgets\qfilesystemmodel.h \
 		C:\Qt\5.5\msvc2013_64\include\QtWidgets\qfontdialog.h \
 		C:\Qt\5.5\msvc2013_64\include\QtWidgets\qinputdialog.h \
-		C:\Qt\5.5\msvc2013_64\include\QtWidgets\qlineedit.h \
 		C:\Qt\5.5\msvc2013_64\include\QtWidgets\qmessagebox.h \
 		C:\Qt\5.5\msvc2013_64\include\QtWidgets\qprogressdialog.h \
 		C:\Qt\5.5\msvc2013_64\include\QtWidgets\qwizard.h \
@@ -2126,11 +2133,9 @@ debug\dialog.obj: ..\DataVisualization\dialog.cpp ../DataVisualization/dialog.h 
 		C:\Qt\5.5\msvc2013_64\include\QtWidgets\qundogroup.h \
 		C:\Qt\5.5\msvc2013_64\include\QtWidgets\qundostack.h \
 		C:\Qt\5.5\msvc2013_64\include\QtWidgets\qundoview.h \
-		C:\Qt\5.5\msvc2013_64\include\QtWidgets\qabstractbutton.h \
 		C:\Qt\5.5\msvc2013_64\include\QtWidgets\qcalendarwidget.h \
 		C:\Qt\5.5\msvc2013_64\include\QtWidgets\qcheckbox.h \
 		C:\Qt\5.5\msvc2013_64\include\QtWidgets\qcommandlinkbutton.h \
-		C:\Qt\5.5\msvc2013_64\include\QtWidgets\qpushbutton.h \
 		C:\Qt\5.5\msvc2013_64\include\QtWidgets\qdatetimeedit.h \
 		C:\Qt\5.5\msvc2013_64\include\QtWidgets\qdial.h \
 		C:\Qt\5.5\msvc2013_64\include\QtWidgets\qdialogbuttonbox.h \
@@ -2139,7 +2144,6 @@ debug\dialog.obj: ..\DataVisualization\dialog.cpp ../DataVisualization/dialog.h 
 		C:\Qt\5.5\msvc2013_64\include\QtWidgets\qfontcombobox.h \
 		C:\Qt\5.5\msvc2013_64\include\QtWidgets\qgroupbox.h \
 		C:\Qt\5.5\msvc2013_64\include\QtWidgets\qkeysequenceedit.h \
-		C:\Qt\5.5\msvc2013_64\include\QtWidgets\qlabel.h \
 		C:\Qt\5.5\msvc2013_64\include\QtWidgets\qlcdnumber.h \
 		C:\Qt\5.5\msvc2013_64\include\QtWidgets\qmainwindow.h \
 		C:\Qt\5.5\msvc2013_64\include\QtWidgets\qmdiarea.h \

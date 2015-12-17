@@ -16,11 +16,13 @@ Dialog::Dialog(QWidget *parent) :
     if (db.open()) {
         qDebug() << "Opened worksheet succesfully!";
 
-        QSqlQuery query("select * from [" + QString("Sheet1") + "$A1:G44]"); // Select range, place A1:B5 after $
+        QSqlQuery query("select * from [" + QString("Sheet1") + "$A1:G5]"); // Select range, place A1:B5 after $
 
         int columnCount = query.record().count();
         QVector<QString> columnNames;
         QVector< QVector<QString> > data(columnCount);
+
+        qDebug() << query.record().field("Total").type(); // only store ints and doubles and dates, multiple 2D vectors - filled depending on field.type
 
         // store column names
         for (int i = 0; i < columnCount; i++) {
@@ -35,7 +37,7 @@ Dialog::Dialog(QWidget *parent) :
         }
 
         // verify information
-        printExcel(columnNames, data);
+        //printExcel(columnNames, data);
 
         // set up axis combo box
         for (int j = 0; j < columnCount; j++) {
