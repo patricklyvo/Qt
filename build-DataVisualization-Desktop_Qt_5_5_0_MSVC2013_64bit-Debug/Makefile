@@ -210,6 +210,7 @@ Makefile: ..\DataVisualization\DataVisualization.pro C:\Qt\5.5\msvc2013_64\mkspe
 		C:\Qt\5.5\msvc2013_64\mkspecs\features\lex.prf \
 		..\DataVisualization\DataVisualization.pro \
 		C:/Qt/5.5/msvc2013_64/lib/qtmaind.prl \
+		C:/Qt/5.5/msvc2013_64/lib/Qt5PrintSupport.prl \
 		C:/Qt/5.5/msvc2013_64/lib/Qt5Widgets.prl \
 		C:/Qt/5.5/msvc2013_64/lib/Qt5Gui.prl \
 		C:/Qt/5.5/msvc2013_64/lib/Qt5Sql.prl \
@@ -352,6 +353,7 @@ C:\Qt\5.5\msvc2013_64\mkspecs\features\yacc.prf:
 C:\Qt\5.5\msvc2013_64\mkspecs\features\lex.prf:
 ..\DataVisualization\DataVisualization.pro:
 C:/Qt/5.5/msvc2013_64/lib/qtmaind.prl:
+C:/Qt/5.5/msvc2013_64/lib/Qt5PrintSupport.prl:
 C:/Qt/5.5/msvc2013_64/lib/Qt5Widgets.prl:
 C:/Qt/5.5/msvc2013_64/lib/Qt5Gui.prl:
 C:/Qt/5.5/msvc2013_64/lib/Qt5Sql.prl:

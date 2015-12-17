@@ -1,6 +1,8 @@
 #include "dialog.h"
 #include "ui_dialog.h"
 
+#include "qcustomplot.h"
+
 Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Dialog)
@@ -14,7 +16,7 @@ Dialog::Dialog(QWidget *parent) :
     if (db.open()) {
         qDebug() << "Opened worksheet succesfully!";
 
-        QSqlQuery query("select * from [" + QString("Sheet1") + "$A1:A44]"); // Select range, place A1:B5 after $
+        QSqlQuery query("select * from [" + QString("Sheet1") + "$A1:G44]"); // Select range, place A1:B5 after $
 
         int columnCount = query.record().count();
         QVector<QString> columnNames;
@@ -34,6 +36,12 @@ Dialog::Dialog(QWidget *parent) :
 
         // verify information
         printExcel(columnNames, data);
+
+        // set up axis combo box
+        for (int j = 0; j < columnCount; j++) {
+            ui->xComboBox->addItem(columnNames[j]);
+            ui->yComboBox->addItem(columnNames[j]);
+        }
 
         db.close();
     } else {
