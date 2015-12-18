@@ -9,6 +9,34 @@ Dialog::Dialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // validate range input
+    QRegExp rangeRegExp("^((([A-Z])|([A-Z][A-Z]))(([0-9])|([0-9][0-9])|([0-9][0-9][0-9]))):((([A-Z])|([A-Z][A-Z]))(([0-9])|([0-9][0-9])|([0-9][0-9][0-9])))$");
+    QRegExpValidator *rangeValidator = new QRegExpValidator(rangeRegExp, this);
+    ui->rangeLineEdit->setValidator(rangeValidator);
+}
+
+Dialog::~Dialog()
+{
+    delete ui;
+}
+
+// prints stored excel data
+void Dialog::printExcel(const QVector<QString> &columnNames, const QVector<QVector<double> > &data)
+{
+    int numColumns = columnNames.size();
+    qDebug() << "Columns Count: " << numColumns;
+
+    for (int i = 0; i < numColumns; i++) {
+        qDebug() << "Column Name: " << columnNames[i];
+
+        for (int j = 0; j < data[i].size(); j++) {
+            qDebug() << data[i][j];
+        }
+    }
+}
+
+void Dialog::loadExcel(QString sheet, QString range)
+{
     // setting up QSqlDatabase with QODBC to read excel worksheet
     QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
     db.setDatabaseName("exceldsn64");
@@ -16,33 +44,43 @@ Dialog::Dialog(QWidget *parent) :
     if (db.open()) {
         qDebug() << "Opened worksheet succesfully!";
 
-        QSqlQuery query("select * from [" + QString("Sheet1") + "$A1:G5]"); // Select range, place A1:B5 after $
+        QSqlQuery query("select * from [" + sheet + "$" + range + "]"); // Select range, place A1:B5 after $
 
         int columnCount = query.record().count();
-        QVector<QString> columnNames;
-        QVector< QVector<QString> > data(columnCount);
+        columnNames = new QVector<QString>;
+        data = new QVector<QVector<double> > (columnCount);
 
-        qDebug() << query.record().field("Total").type(); // only store ints and doubles and dates, multiple 2D vectors - filled depending on field.type
+        //qDebug() << query.record().field("OrderDate").type(); // only store ints and doubles and dates, multiple 2D vectors - filled depending on field.type
 
         // store column names
         for (int i = 0; i < columnCount; i++) {
-            columnNames.push_back(query.record().fieldName(i));
+            columnNames->push_back(query.record().fieldName(i));
         }
 
         // store data
         while (query.next()) {
             for (int j = 0; j < columnCount; j++) {
-                data[j].push_back(query.value(j).toString());
+                //data[j].push_back(query.value(j).toString());
+                if (query.record().field(j).type() == QVariant::DateTime) {
+                    // to implement
+                }
+                else if (query.record().field(j).type() == QVariant::Double) {
+                    (*data)[j].push_back(query.value(j).toDouble());
+                }
             }
         }
 
         // verify information
-        //printExcel(columnNames, data);
+        printExcel(*columnNames, *data);
 
-        // set up axis combo box
-        for (int j = 0; j < columnCount; j++) {
-            ui->xComboBox->addItem(columnNames[j]);
-            ui->yComboBox->addItem(columnNames[j]);
+        // clear up axis combo box
+        ui->xComboBox->clear();
+        ui->yComboBox->clear();
+
+        // fill axis combo box
+        for (int j = 0; j < columnNames->size(); j++) {
+            ui->xComboBox->addItem((*columnNames)[j]);
+            ui->yComboBox->addItem((*columnNames)[j]);
         }
 
         db.close();
@@ -52,22 +90,31 @@ Dialog::Dialog(QWidget *parent) :
     }
 }
 
-Dialog::~Dialog()
+void Dialog::plot()
 {
-    delete ui;
+    // TODO
+    ui->xComboBox->setCurrentIndex(4);
+    ui->yComboBox->setCurrentIndex(5);
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph(0)->setData((*data)[ui->xComboBox->currentIndex()], (*data)[ui->yComboBox->currentIndex()]);
+    ui->customPlot->xAxis->setLabel((*columnNames)[ui->xComboBox->currentIndex()]);
+    ui->customPlot->yAxis->setLabel((*columnNames)[ui->yComboBox->currentIndex()]);
+    ui->customPlot->xAxis->setRange(0, 100);
+    ui->customPlot->yAxis->setRange(0,300);
+    ui->customPlot->replot();
 }
 
-// prints stored excel data
-void Dialog::printExcel(const QVector<QString> &columnNames, const QVector<QVector<QString> > &data)
+void Dialog::on_loadPushButton_clicked()
 {
-    int numColumns = columnNames.size();
-    qDebug() << "Columns: " << numColumns;
-
-    for (int i = 0; i < numColumns; i++) {
-        qDebug() << "Column Name: " << columnNames[i];
-
-        for (int j = 0; j < data[i].size(); j++) {
-            qDebug() << data[i][j];
-        }
+    // make sure user filled in line edits
+    if (ui->sheetLineEdit->text().isEmpty()) {
+        QMessageBox::warning(this,tr("Sheet Warning"),tr("Please enter which Excel sheet to load."));
+    }
+    else if (ui->rangeLineEdit->text().isEmpty()) {
+        QMessageBox::warning(this,tr("Range Warning"),tr("Please enter the range of data to load."));
+    }
+    else {
+        loadExcel(ui->sheetLineEdit->text(), ui->rangeLineEdit->text());
     }
 }

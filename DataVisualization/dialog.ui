@@ -72,8 +72,8 @@
   <widget class="QLabel" name="rangeLabel">
    <property name="geometry">
     <rect>
-     <x>410</x>
-     <y>10</y>
+     <x>400</x>
+     <y>60</y>
      <width>141</width>
      <height>16</height>
     </rect>
@@ -85,8 +85,8 @@
   <widget class="QLineEdit" name="rangeLineEdit">
    <property name="geometry">
     <rect>
-     <x>410</x>
-     <y>30</y>
+     <x>400</x>
+     <y>80</y>
      <width>121</width>
      <height>20</height>
     </rect>
@@ -98,14 +98,40 @@
   <widget class="QPushButton" name="loadPushButton">
    <property name="geometry">
     <rect>
-     <x>410</x>
-     <y>60</y>
+     <x>400</x>
+     <y>110</y>
      <width>121</width>
      <height>23</height>
     </rect>
    </property>
    <property name="text">
     <string>Load Data</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="sheetLabel">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>10</y>
+     <width>91</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Enter Excel sheet:</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="sheetLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>30</y>
+     <width>121</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>ex. Sheet1</string>
    </property>
   </widget>
  </widget>

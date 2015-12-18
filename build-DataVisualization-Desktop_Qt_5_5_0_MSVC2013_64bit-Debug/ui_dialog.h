@@ -34,6 +34,8 @@ public:
     QLabel *rangeLabel;
     QLineEdit *rangeLineEdit;
     QPushButton *loadPushButton;
+    QLabel *sheetLabel;
+    QLineEdit *sheetLineEdit;
 
     void setupUi(QDialog *Dialog)
     {
@@ -57,13 +59,19 @@ public:
         label_2->setGeometry(QRect(400, 180, 47, 13));
         rangeLabel = new QLabel(Dialog);
         rangeLabel->setObjectName(QStringLiteral("rangeLabel"));
-        rangeLabel->setGeometry(QRect(410, 10, 141, 16));
+        rangeLabel->setGeometry(QRect(400, 60, 141, 16));
         rangeLineEdit = new QLineEdit(Dialog);
         rangeLineEdit->setObjectName(QStringLiteral("rangeLineEdit"));
-        rangeLineEdit->setGeometry(QRect(410, 30, 121, 20));
+        rangeLineEdit->setGeometry(QRect(400, 80, 121, 20));
         loadPushButton = new QPushButton(Dialog);
         loadPushButton->setObjectName(QStringLiteral("loadPushButton"));
-        loadPushButton->setGeometry(QRect(410, 60, 121, 23));
+        loadPushButton->setGeometry(QRect(400, 110, 121, 23));
+        sheetLabel = new QLabel(Dialog);
+        sheetLabel->setObjectName(QStringLiteral("sheetLabel"));
+        sheetLabel->setGeometry(QRect(400, 10, 91, 16));
+        sheetLineEdit = new QLineEdit(Dialog);
+        sheetLineEdit->setObjectName(QStringLiteral("sheetLineEdit"));
+        sheetLineEdit->setGeometry(QRect(400, 30, 121, 20));
 
         retranslateUi(Dialog);
 
@@ -78,6 +86,8 @@ public:
         rangeLabel->setText(QApplication::translate("Dialog", "Enter Excel data range:", 0));
         rangeLineEdit->setPlaceholderText(QApplication::translate("Dialog", "ex. A1:B5", 0));
         loadPushButton->setText(QApplication::translate("Dialog", "Load Data", 0));
+        sheetLabel->setText(QApplication::translate("Dialog", "Enter Excel sheet:", 0));
+        sheetLineEdit->setPlaceholderText(QApplication::translate("Dialog", "ex. Sheet1", 0));
     } // retranslateUi
 
 };
