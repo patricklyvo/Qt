@@ -25,6 +25,8 @@ public:
     void printExcel(const QVector<QString> &columnNames, const QVector<QVector<double> > &data);
     void loadExcel(QString sheet, QString range);
     void plot();
+    const double &findMin(const QVector<double> &data);
+    const double &findMax(const QVector<double> &data);
 
 private:
     Ui::Dialog *ui;

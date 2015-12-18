@@ -111,10 +111,34 @@ void Dialog::plot()
     ui->customPlot->yAxis->setLabel((*columnNames)[ui->yComboBox->currentIndex()]);
 
     // setting axes ranges
-    ui->customPlot->xAxis->setRange(0,100);
-    ui->customPlot->yAxis->setRange(0,300);
+    ui->customPlot->xAxis->setRange(findMin((*data)[ui->xComboBox->currentIndex()]), findMax((*data)[ui->xComboBox->currentIndex()]));
+    ui->customPlot->yAxis->setRange(findMin((*data)[ui->yComboBox->currentIndex()]), findMax((*data)[ui->yComboBox->currentIndex()]));
 
     ui->customPlot->replot();
+}
+
+const double &Dialog::findMin(const QVector<double> &data)
+{
+    double minIndex = 0.0;
+
+    for (double i = 1; i < data.size(); i++) {
+        if (data[minIndex] > data[i])
+            minIndex = i;
+    }
+
+    return data[minIndex];
+}
+
+const double &Dialog::findMax(const QVector<double> &data)
+{
+    double maxIndex = 0.0;
+
+    for (double i = 1; i < data.size(); i++) {
+        if (data[maxIndex] < data[i])
+            maxIndex = i;
+    }
+
+    return data[maxIndex];
 }
 
 void Dialog::on_loadPushButton_clicked()
