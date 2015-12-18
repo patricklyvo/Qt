@@ -36,6 +36,7 @@ public:
     QPushButton *loadPushButton;
     QLabel *sheetLabel;
     QLineEdit *sheetLineEdit;
+    QPushButton *plotPushButton;
 
     void setupUi(QDialog *Dialog)
     {
@@ -47,31 +48,34 @@ public:
         customPlot->setGeometry(QRect(10, 10, 381, 311));
         yComboBox = new QComboBox(Dialog);
         yComboBox->setObjectName(QStringLiteral("yComboBox"));
-        yComboBox->setGeometry(QRect(440, 180, 101, 22));
+        yComboBox->setGeometry(QRect(439, 181, 101, 20));
         xComboBox = new QComboBox(Dialog);
         xComboBox->setObjectName(QStringLiteral("xComboBox"));
-        xComboBox->setGeometry(QRect(440, 150, 101, 22));
+        xComboBox->setGeometry(QRect(439, 151, 101, 20));
         label = new QLabel(Dialog);
         label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(400, 160, 47, 13));
+        label->setGeometry(QRect(401, 151, 33, 16));
         label_2 = new QLabel(Dialog);
         label_2->setObjectName(QStringLiteral("label_2"));
-        label_2->setGeometry(QRect(400, 180, 47, 13));
+        label_2->setGeometry(QRect(401, 181, 33, 16));
         rangeLabel = new QLabel(Dialog);
         rangeLabel->setObjectName(QStringLiteral("rangeLabel"));
         rangeLabel->setGeometry(QRect(400, 60, 141, 16));
         rangeLineEdit = new QLineEdit(Dialog);
         rangeLineEdit->setObjectName(QStringLiteral("rangeLineEdit"));
-        rangeLineEdit->setGeometry(QRect(400, 80, 121, 20));
+        rangeLineEdit->setGeometry(QRect(400, 80, 141, 20));
         loadPushButton = new QPushButton(Dialog);
         loadPushButton->setObjectName(QStringLiteral("loadPushButton"));
-        loadPushButton->setGeometry(QRect(400, 110, 121, 23));
+        loadPushButton->setGeometry(QRect(400, 110, 141, 23));
         sheetLabel = new QLabel(Dialog);
         sheetLabel->setObjectName(QStringLiteral("sheetLabel"));
         sheetLabel->setGeometry(QRect(400, 10, 91, 16));
         sheetLineEdit = new QLineEdit(Dialog);
         sheetLineEdit->setObjectName(QStringLiteral("sheetLineEdit"));
-        sheetLineEdit->setGeometry(QRect(400, 30, 121, 20));
+        sheetLineEdit->setGeometry(QRect(400, 30, 141, 20));
+        plotPushButton = new QPushButton(Dialog);
+        plotPushButton->setObjectName(QStringLiteral("plotPushButton"));
+        plotPushButton->setGeometry(QRect(400, 300, 141, 23));
 
         retranslateUi(Dialog);
 
@@ -88,6 +92,7 @@ public:
         loadPushButton->setText(QApplication::translate("Dialog", "Load Data", 0));
         sheetLabel->setText(QApplication::translate("Dialog", "Enter Excel sheet:", 0));
         sheetLineEdit->setPlaceholderText(QApplication::translate("Dialog", "ex. Sheet1", 0));
+        plotPushButton->setText(QApplication::translate("Dialog", "Plot", 0));
     } // retranslateUi
 
 };

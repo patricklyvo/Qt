@@ -1,3 +1,9 @@
+/****************************************************************************
+**
+** This file was written by Patrick Ly-Vo.
+**
+****************************************************************************/
+
 #ifndef DIALOG_H
 #define DIALOG_H
 
@@ -27,6 +33,7 @@ private:
 
 private slots:
     void on_loadPushButton_clicked();
+    void on_plotPushButton_clicked();
 };
 
 #endif // DIALOG_H

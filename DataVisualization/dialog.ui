@@ -26,30 +26,30 @@
   <widget class="QComboBox" name="yComboBox">
    <property name="geometry">
     <rect>
-     <x>440</x>
-     <y>180</y>
+     <x>439</x>
+     <y>181</y>
      <width>101</width>
-     <height>22</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>
   <widget class="QComboBox" name="xComboBox">
    <property name="geometry">
     <rect>
-     <x>440</x>
-     <y>150</y>
+     <x>439</x>
+     <y>151</y>
      <width>101</width>
-     <height>22</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>400</x>
-     <y>160</y>
-     <width>47</width>
-     <height>13</height>
+     <x>401</x>
+     <y>151</y>
+     <width>33</width>
+     <height>16</height>
     </rect>
    </property>
    <property name="text">
@@ -59,10 +59,10 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>400</x>
-     <y>180</y>
-     <width>47</width>
-     <height>13</height>
+     <x>401</x>
+     <y>181</y>
+     <width>33</width>
+     <height>16</height>
     </rect>
    </property>
    <property name="text">
@@ -87,7 +87,7 @@
     <rect>
      <x>400</x>
      <y>80</y>
-     <width>121</width>
+     <width>141</width>
      <height>20</height>
     </rect>
    </property>
@@ -100,7 +100,7 @@
     <rect>
      <x>400</x>
      <y>110</y>
-     <width>121</width>
+     <width>141</width>
      <height>23</height>
     </rect>
    </property>
@@ -126,12 +126,25 @@
     <rect>
      <x>400</x>
      <y>30</y>
-     <width>121</width>
+     <width>141</width>
      <height>20</height>
     </rect>
    </property>
    <property name="placeholderText">
     <string>ex. Sheet1</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="plotPushButton">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>300</y>
+     <width>141</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Plot</string>
    </property>
   </widget>
  </widget>

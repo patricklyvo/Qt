@@ -1,3 +1,9 @@
+/****************************************************************************
+**
+** This file was written by Patrick Ly-Vo.
+**
+****************************************************************************/
+
 #include "dialog.h"
 #include "ui_dialog.h"
 
@@ -13,6 +19,8 @@ Dialog::Dialog(QWidget *parent) :
     QRegExp rangeRegExp("^((([A-Z])|([A-Z][A-Z]))(([0-9])|([0-9][0-9])|([0-9][0-9][0-9]))):((([A-Z])|([A-Z][A-Z]))(([0-9])|([0-9][0-9])|([0-9][0-9][0-9])))$");
     QRegExpValidator *rangeValidator = new QRegExpValidator(rangeRegExp, this);
     ui->rangeLineEdit->setValidator(rangeValidator);
+
+    setWindowTitle(tr("Data Visualization"));
 }
 
 Dialog::~Dialog()
@@ -92,16 +100,20 @@ void Dialog::loadExcel(QString sheet, QString range)
 
 void Dialog::plot()
 {
-    // TODO
-    ui->xComboBox->setCurrentIndex(4);
-    ui->yComboBox->setCurrentIndex(5);
+    // TODO: remove old graphs
 
+    // creating graph and assigning data
     ui->customPlot->addGraph();
     ui->customPlot->graph(0)->setData((*data)[ui->xComboBox->currentIndex()], (*data)[ui->yComboBox->currentIndex()]);
+
+    // setting axes labels
     ui->customPlot->xAxis->setLabel((*columnNames)[ui->xComboBox->currentIndex()]);
     ui->customPlot->yAxis->setLabel((*columnNames)[ui->yComboBox->currentIndex()]);
-    ui->customPlot->xAxis->setRange(0, 100);
+
+    // setting axes ranges
+    ui->customPlot->xAxis->setRange(0,100);
     ui->customPlot->yAxis->setRange(0,300);
+
     ui->customPlot->replot();
 }
 
@@ -117,4 +129,9 @@ void Dialog::on_loadPushButton_clicked()
     else {
         loadExcel(ui->sheetLineEdit->text(), ui->rangeLineEdit->text());
     }
+}
+
+void Dialog::on_plotPushButton_clicked()
+{
+    plot();
 }
