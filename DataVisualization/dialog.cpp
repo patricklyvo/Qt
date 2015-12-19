@@ -119,7 +119,7 @@ void Dialog::plot()
 
 const double &Dialog::findMin(const QVector<double> &data)
 {
-    double minIndex = 0.0;
+    int minIndex = 0;
 
     for (double i = 1; i < data.size(); i++) {
         if (data[minIndex] > data[i])
@@ -131,7 +131,7 @@ const double &Dialog::findMin(const QVector<double> &data)
 
 const double &Dialog::findMax(const QVector<double> &data)
 {
-    double maxIndex = 0.0;
+    int maxIndex = 0;
 
     for (double i = 1; i < data.size(); i++) {
         if (data[maxIndex] < data[i])

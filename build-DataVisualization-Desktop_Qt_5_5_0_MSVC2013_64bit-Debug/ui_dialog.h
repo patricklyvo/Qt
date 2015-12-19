@@ -42,7 +42,7 @@ public:
     {
         if (Dialog->objectName().isEmpty())
             Dialog->setObjectName(QStringLiteral("Dialog"));
-        Dialog->resize(551, 329);
+        Dialog->resize(551, 331);
         customPlot = new QCustomPlot(Dialog);
         customPlot->setObjectName(QStringLiteral("customPlot"));
         customPlot->setGeometry(QRect(10, 10, 381, 311));
