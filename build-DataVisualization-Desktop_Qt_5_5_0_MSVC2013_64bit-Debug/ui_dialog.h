@@ -15,10 +15,14 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDialog>
+#include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QRadioButton>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 #include "qcustomplot.h"
 
 QT_BEGIN_NAMESPACE
@@ -37,45 +41,72 @@ public:
     QLabel *sheetLabel;
     QLineEdit *sheetLineEdit;
     QPushButton *plotPushButton;
+    QGroupBox *typeGroupBox;
+    QWidget *widget;
+    QVBoxLayout *verticalLayout;
+    QRadioButton *lineRadioButton;
+    QRadioButton *barRadioButton;
 
     void setupUi(QDialog *Dialog)
     {
         if (Dialog->objectName().isEmpty())
             Dialog->setObjectName(QStringLiteral("Dialog"));
-        Dialog->resize(551, 331);
+        Dialog->resize(582, 351);
         customPlot = new QCustomPlot(Dialog);
         customPlot->setObjectName(QStringLiteral("customPlot"));
-        customPlot->setGeometry(QRect(10, 10, 381, 311));
+        customPlot->setGeometry(QRect(10, 10, 411, 331));
         yComboBox = new QComboBox(Dialog);
         yComboBox->setObjectName(QStringLiteral("yComboBox"));
-        yComboBox->setGeometry(QRect(439, 181, 101, 20));
+        yComboBox->setGeometry(QRect(469, 181, 101, 20));
         xComboBox = new QComboBox(Dialog);
         xComboBox->setObjectName(QStringLiteral("xComboBox"));
-        xComboBox->setGeometry(QRect(439, 151, 101, 20));
+        xComboBox->setGeometry(QRect(469, 151, 101, 20));
         label = new QLabel(Dialog);
         label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(401, 151, 33, 16));
+        label->setGeometry(QRect(431, 151, 33, 16));
         label_2 = new QLabel(Dialog);
         label_2->setObjectName(QStringLiteral("label_2"));
-        label_2->setGeometry(QRect(401, 181, 33, 16));
+        label_2->setGeometry(QRect(431, 181, 33, 16));
         rangeLabel = new QLabel(Dialog);
         rangeLabel->setObjectName(QStringLiteral("rangeLabel"));
-        rangeLabel->setGeometry(QRect(400, 60, 141, 16));
+        rangeLabel->setGeometry(QRect(430, 60, 141, 16));
         rangeLineEdit = new QLineEdit(Dialog);
         rangeLineEdit->setObjectName(QStringLiteral("rangeLineEdit"));
-        rangeLineEdit->setGeometry(QRect(400, 80, 141, 20));
+        rangeLineEdit->setGeometry(QRect(430, 80, 141, 20));
         loadPushButton = new QPushButton(Dialog);
         loadPushButton->setObjectName(QStringLiteral("loadPushButton"));
-        loadPushButton->setGeometry(QRect(400, 110, 141, 23));
+        loadPushButton->setGeometry(QRect(430, 110, 141, 23));
         sheetLabel = new QLabel(Dialog);
         sheetLabel->setObjectName(QStringLiteral("sheetLabel"));
-        sheetLabel->setGeometry(QRect(400, 10, 91, 16));
+        sheetLabel->setGeometry(QRect(430, 10, 91, 16));
         sheetLineEdit = new QLineEdit(Dialog);
         sheetLineEdit->setObjectName(QStringLiteral("sheetLineEdit"));
-        sheetLineEdit->setGeometry(QRect(400, 30, 141, 20));
+        sheetLineEdit->setGeometry(QRect(430, 30, 141, 20));
         plotPushButton = new QPushButton(Dialog);
         plotPushButton->setObjectName(QStringLiteral("plotPushButton"));
-        plotPushButton->setGeometry(QRect(400, 300, 141, 23));
+        plotPushButton->setGeometry(QRect(430, 320, 141, 23));
+        typeGroupBox = new QGroupBox(Dialog);
+        typeGroupBox->setObjectName(QStringLiteral("typeGroupBox"));
+        typeGroupBox->setGeometry(QRect(430, 210, 141, 71));
+        widget = new QWidget(typeGroupBox);
+        widget->setObjectName(QStringLiteral("widget"));
+        widget->setGeometry(QRect(10, 20, 121, 42));
+        verticalLayout = new QVBoxLayout(widget);
+        verticalLayout->setSpacing(6);
+        verticalLayout->setContentsMargins(11, 11, 11, 11);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        lineRadioButton = new QRadioButton(widget);
+        lineRadioButton->setObjectName(QStringLiteral("lineRadioButton"));
+        lineRadioButton->setChecked(true);
+
+        verticalLayout->addWidget(lineRadioButton);
+
+        barRadioButton = new QRadioButton(widget);
+        barRadioButton->setObjectName(QStringLiteral("barRadioButton"));
+
+        verticalLayout->addWidget(barRadioButton);
+
 
         retranslateUi(Dialog);
 
@@ -93,6 +124,9 @@ public:
         sheetLabel->setText(QApplication::translate("Dialog", "Enter Excel sheet:", 0));
         sheetLineEdit->setPlaceholderText(QApplication::translate("Dialog", "ex. Sheet1", 0));
         plotPushButton->setText(QApplication::translate("Dialog", "Plot", 0));
+        typeGroupBox->setTitle(QApplication::translate("Dialog", "Graph Type", 0));
+        lineRadioButton->setText(QApplication::translate("Dialog", "Line Graph", 0));
+        barRadioButton->setText(QApplication::translate("Dialog", "Bar Chart", 0));
     } // retranslateUi
 
 };

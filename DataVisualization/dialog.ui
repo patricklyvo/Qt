@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>551</width>
-    <height>331</height>
+    <width>582</width>
+    <height>351</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,15 +18,15 @@
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>381</width>
-     <height>311</height>
+     <width>411</width>
+     <height>331</height>
     </rect>
    </property>
   </widget>
   <widget class="QComboBox" name="yComboBox">
    <property name="geometry">
     <rect>
-     <x>439</x>
+     <x>469</x>
      <y>181</y>
      <width>101</width>
      <height>20</height>
@@ -36,7 +36,7 @@
   <widget class="QComboBox" name="xComboBox">
    <property name="geometry">
     <rect>
-     <x>439</x>
+     <x>469</x>
      <y>151</y>
      <width>101</width>
      <height>20</height>
@@ -46,7 +46,7 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>401</x>
+     <x>431</x>
      <y>151</y>
      <width>33</width>
      <height>16</height>
@@ -59,7 +59,7 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>401</x>
+     <x>431</x>
      <y>181</y>
      <width>33</width>
      <height>16</height>
@@ -72,7 +72,7 @@
   <widget class="QLabel" name="rangeLabel">
    <property name="geometry">
     <rect>
-     <x>400</x>
+     <x>430</x>
      <y>60</y>
      <width>141</width>
      <height>16</height>
@@ -85,7 +85,7 @@
   <widget class="QLineEdit" name="rangeLineEdit">
    <property name="geometry">
     <rect>
-     <x>400</x>
+     <x>430</x>
      <y>80</y>
      <width>141</width>
      <height>20</height>
@@ -98,7 +98,7 @@
   <widget class="QPushButton" name="loadPushButton">
    <property name="geometry">
     <rect>
-     <x>400</x>
+     <x>430</x>
      <y>110</y>
      <width>141</width>
      <height>23</height>
@@ -111,7 +111,7 @@
   <widget class="QLabel" name="sheetLabel">
    <property name="geometry">
     <rect>
-     <x>400</x>
+     <x>430</x>
      <y>10</y>
      <width>91</width>
      <height>16</height>
@@ -124,7 +124,7 @@
   <widget class="QLineEdit" name="sheetLineEdit">
    <property name="geometry">
     <rect>
-     <x>400</x>
+     <x>430</x>
      <y>30</y>
      <width>141</width>
      <height>20</height>
@@ -137,8 +137,8 @@
   <widget class="QPushButton" name="plotPushButton">
    <property name="geometry">
     <rect>
-     <x>400</x>
-     <y>300</y>
+     <x>430</x>
+     <y>320</y>
      <width>141</width>
      <height>23</height>
     </rect>
@@ -146,6 +146,48 @@
    <property name="text">
     <string>Plot</string>
    </property>
+  </widget>
+  <widget class="QGroupBox" name="typeGroupBox">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>210</y>
+     <width>141</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Graph Type</string>
+   </property>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>121</width>
+      <height>42</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QRadioButton" name="lineRadioButton">
+       <property name="text">
+        <string>Line Graph</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="barRadioButton">
+       <property name="text">
+        <string>Bar Chart</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>

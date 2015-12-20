@@ -100,11 +100,21 @@ void Dialog::loadExcel(QString sheet, QString range)
 
 void Dialog::plot()
 {
-    // TODO: remove old graphs
+    // remove old graphs
+    ui->customPlot->clearGraphs();
+    ui->customPlot->clearPlottables();
 
-    // creating graph and assigning data
-    ui->customPlot->addGraph();
-    ui->customPlot->graph(0)->setData((*data)[ui->xComboBox->currentIndex()], (*data)[ui->yComboBox->currentIndex()]);
+    // check for type of graph
+    if (ui->lineRadioButton->isChecked()) {
+        // creating line graph and assigning data
+        QCPGraph *graph1 = ui->customPlot->addGraph();
+        graph1->setData((*data)[ui->xComboBox->currentIndex()], (*data)[ui->yComboBox->currentIndex()]);
+    } else {
+        // creating bar chart and assigning data
+        QCPBars *bars1 = new QCPBars(ui->customPlot->xAxis, ui->customPlot->yAxis);
+        ui->customPlot->addPlottable(bars1);
+        bars1->setData((*data)[ui->xComboBox->currentIndex()], (*data)[ui->yComboBox->currentIndex()]);
+    }
 
     // setting axes labels
     ui->customPlot->xAxis->setLabel((*columnNames)[ui->xComboBox->currentIndex()]);
