@@ -63,6 +63,7 @@ void Dialog::loadExcel(QString sheet, QString range)
         int columnCount = query.record().count();
         columnNames = new QVector<QString>;
         data = new QVector<QVector<double> > (columnCount);
+        dateTimeData = new QVector<bool> (columnCount);
 
         //qDebug() << query.record().field("OrderDate").type(); // only store ints and doubles and dates, multiple 2D vectors - filled depending on field.type
 
@@ -75,10 +76,13 @@ void Dialog::loadExcel(QString sheet, QString range)
         while (query.next()) {
             for (int j = 0; j < columnCount; j++) {
                 if (query.record().field(j).type() == QVariant::DateTime) {
-                    // to implement
+                    // mark as dateTime as true
+                    if (query.at() == 0) (*dateTimeData)[j] = true;
+
+                    (*data)[j].push_back(((query.value(j)).toDateTime()).toTime_t());
                 }
                 else if (query.record().field(j).type() == QVariant::Double) {
-                    (*data)[j].push_back(query.value(j).toDouble());
+                    (*data)[j].push_back((query.value(j)).toDouble());
                 }
             }
         }
@@ -134,27 +138,39 @@ void Dialog::plot()
       break;
     }
 
+    int xIndex = ui->xComboBox->currentIndex();
+    int yIndex = ui->yComboBox->currentIndex();
     // check for type of graph
     if (ui->lineRadioButton->isChecked()) {
         // creating line graph and assigning data
         QCPGraph *graph1 = ui->customPlot->addGraph();
         graph1->setPen(plotPen);
-        graph1->setData((*data)[ui->xComboBox->currentIndex()], (*data)[ui->yComboBox->currentIndex()]);
+        graph1->setData((*data)[xIndex], (*data)[yIndex]);
     } else {
         // creating bar chart and assigning data
         QCPBars *bars1 = new QCPBars(ui->customPlot->xAxis, ui->customPlot->yAxis);
         bars1->setPen(plotPen);
         ui->customPlot->addPlottable(bars1);
-        bars1->setData((*data)[ui->xComboBox->currentIndex()], (*data)[ui->yComboBox->currentIndex()]);
+        bars1->setData((*data)[xIndex], (*data)[yIndex]);
+    }
+
+    // if axis is datetime
+    if ((*dateTimeData)[xIndex] && !(*dateTimeData)[yIndex]) {
+        ui->customPlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
+        ui->customPlot->xAxis->setDateTimeFormat("MMMM\nyyyy");
+    }
+    if (!(*dateTimeData)[xIndex] && (*dateTimeData)[yIndex]) {
+        ui->customPlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
+        ui->customPlot->yAxis->setDateTimeFormat("MMMM\nyyyy");
     }
 
     // setting axes labels
-    ui->customPlot->xAxis->setLabel((*columnNames)[ui->xComboBox->currentIndex()]);
-    ui->customPlot->yAxis->setLabel((*columnNames)[ui->yComboBox->currentIndex()]);
+    ui->customPlot->xAxis->setLabel((*columnNames)[xIndex]);
+    ui->customPlot->yAxis->setLabel((*columnNames)[yIndex]);
 
     // setting axes ranges
-    ui->customPlot->xAxis->setRange(findMin((*data)[ui->xComboBox->currentIndex()]), findMax((*data)[ui->xComboBox->currentIndex()]));
-    ui->customPlot->yAxis->setRange(findMin((*data)[ui->yComboBox->currentIndex()]), findMax((*data)[ui->yComboBox->currentIndex()]));
+    ui->customPlot->xAxis->setRange(findMin((*data)[xIndex]), findMax((*data)[xIndex]));
+    ui->customPlot->yAxis->setRange(findMin((*data)[yIndex]), findMax((*data)[yIndex]));
 
     ui->customPlot->replot();
 }
@@ -200,8 +216,9 @@ void Dialog::on_loadPushButton_clicked()
 void Dialog::on_plotPushButton_clicked()
 {
     // only allow plotting of columns with valid data
-    if ((*data)[ui->yComboBox->currentIndex()].isEmpty() || (*data)[ui->yComboBox->currentIndex()].isEmpty()) {
-        QMessageBox::warning(this,tr("Data Warning"),tr("Only columns with value type 'double' can be plotted."));
+    if (((*data)[ui->xComboBox->currentIndex()].isEmpty() && !(*dateTimeData)[ui->xComboBox->currentIndex()]) ||
+            ((*data)[ui->yComboBox->currentIndex()].isEmpty() && !(*dateTimeData)[ui->yComboBox->currentIndex()])) {
+        QMessageBox::warning(this,tr("Data Warning"),tr("Only columns with value type 'double' or 'DateTime' can be plotted."));
     } else {
         plot();
     }

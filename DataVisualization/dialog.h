@@ -32,6 +32,7 @@ private:
     Ui::Dialog *ui;
     QVector<QString> *columnNames;
     QVector<QVector<double> > *data;
+    QVector<bool> *dateTimeData;
 
 private slots:
     void on_loadPushButton_clicked();
