@@ -20,6 +20,12 @@ Dialog::Dialog(QWidget *parent) :
     QRegExpValidator *rangeValidator = new QRegExpValidator(rangeRegExp, this);
     ui->rangeLineEdit->setValidator(rangeValidator);
 
+    // for chart line colors
+    QString colorString = "Black,Blue,Red,Green,Yellow,Magenta,Cyan";
+    QStringList colors = colorString.split(",");
+    ui->colorComboBox->addItems(colors);
+    ui->colorComboBox->setCurrentIndex(0);
+
     setWindowTitle(tr("Data Visualization"));
 }
 
@@ -68,7 +74,6 @@ void Dialog::loadExcel(QString sheet, QString range)
         // store data
         while (query.next()) {
             for (int j = 0; j < columnCount; j++) {
-                //data[j].push_back(query.value(j).toString());
                 if (query.record().field(j).type() == QVariant::DateTime) {
                     // to implement
                 }
@@ -79,16 +84,16 @@ void Dialog::loadExcel(QString sheet, QString range)
         }
 
         // verify information
-        printExcel(*columnNames, *data);
+        //printExcel(*columnNames, *data);
 
         // clear up axis combo box
         ui->xComboBox->clear();
         ui->yComboBox->clear();
 
         // fill axis combo box
-        for (int j = 0; j < columnNames->size(); j++) {
-            ui->xComboBox->addItem((*columnNames)[j]);
-            ui->yComboBox->addItem((*columnNames)[j]);
+        for (int k = 0; k < columnNames->size(); ++k) {
+            ui->xComboBox->addItem((*columnNames)[k]);
+            ui->yComboBox->addItem((*columnNames)[k]);
         }
 
         db.close();
@@ -100,18 +105,45 @@ void Dialog::loadExcel(QString sheet, QString range)
 
 void Dialog::plot()
 {
-    // remove old graphs
-    ui->customPlot->clearGraphs();
-    ui->customPlot->clearPlottables();
+    QPen plotPen;
+    // set graph color: Black,Blue,Red,Green,Yellow,Magenta,Cyan
+    switch (ui->colorComboBox->currentIndex()) {
+    case 0:
+      plotPen.setColor(Qt::black);
+      break;
+    case 1:
+      plotPen.setColor(Qt::blue);
+      break;
+    case 2:
+      plotPen.setColor(Qt::red);
+      break;
+    case 3:
+      plotPen.setColor(Qt::green);
+      break;
+    case 4:
+      plotPen.setColor(Qt::yellow);
+      break;
+    case 5:
+      plotPen.setColor(Qt::magenta);
+      break;
+    case 6:
+      plotPen.setColor(Qt::cyan);
+      break;
+    default:
+      plotPen.setColor(Qt::black);
+      break;
+    }
 
     // check for type of graph
     if (ui->lineRadioButton->isChecked()) {
         // creating line graph and assigning data
         QCPGraph *graph1 = ui->customPlot->addGraph();
+        graph1->setPen(plotPen);
         graph1->setData((*data)[ui->xComboBox->currentIndex()], (*data)[ui->yComboBox->currentIndex()]);
     } else {
         // creating bar chart and assigning data
         QCPBars *bars1 = new QCPBars(ui->customPlot->xAxis, ui->customPlot->yAxis);
+        bars1->setPen(plotPen);
         ui->customPlot->addPlottable(bars1);
         bars1->setData((*data)[ui->xComboBox->currentIndex()], (*data)[ui->yComboBox->currentIndex()]);
     }
@@ -167,5 +199,18 @@ void Dialog::on_loadPushButton_clicked()
 
 void Dialog::on_plotPushButton_clicked()
 {
-    plot();
+    // only allow plotting of columns with valid data
+    if ((*data)[ui->yComboBox->currentIndex()].isEmpty() || (*data)[ui->yComboBox->currentIndex()].isEmpty()) {
+        QMessageBox::warning(this,tr("Data Warning"),tr("Only columns with value type 'double' can be plotted."));
+    } else {
+        plot();
+    }
+}
+
+void Dialog::on_clearPushButton_clicked()
+{
+    // remove old graphs
+    ui->customPlot->clearGraphs();
+    ui->customPlot->clearPlottables();
+    ui->customPlot->replot();
 }

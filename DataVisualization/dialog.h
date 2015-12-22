@@ -36,6 +36,7 @@ private:
 private slots:
     void on_loadPushButton_clicked();
     void on_plotPushButton_clicked();
+    void on_clearPushButton_clicked();
 };
 
 #endif // DIALOG_H
