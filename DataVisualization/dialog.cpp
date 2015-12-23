@@ -7,8 +7,6 @@
 #include "dialog.h"
 #include "ui_dialog.h"
 
-#include "qcustomplot.h"
-
 Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Dialog)
@@ -247,4 +245,11 @@ void Dialog::on_clearPushButton_clicked()
     ui->customPlot->clearGraphs();
     ui->customPlot->clearPlottables();
     ui->customPlot->replot();
+}
+
+void Dialog::on_plotSettingsPushButton_clicked()
+{
+    // show PlotSettings
+    plotSettings = new PlotSettings(this);
+    plotSettings->show();
 }

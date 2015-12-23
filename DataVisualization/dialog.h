@@ -11,6 +11,9 @@
 #include <QtSql>
 #include <QtDebug>
 
+#include "qcustomplot.h"
+#include "plotsettings.h"
+
 namespace Ui {
 class Dialog;
 }
@@ -35,10 +38,13 @@ private:
     QVector<bool> *dateTimeData;
     bool dataLoaded;
 
+    PlotSettings *plotSettings;
+
 private slots:
     void on_loadPushButton_clicked();
     void on_plotPushButton_clicked();
     void on_clearPushButton_clicked();
+    void on_plotSettingsPushButton_clicked();
 };
 
 #endif // DIALOG_H

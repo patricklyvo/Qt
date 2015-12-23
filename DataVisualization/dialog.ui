@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>609</width>
-    <height>370</height>
+    <width>619</width>
+    <height>469</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,16 +18,16 @@
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>441</width>
-     <height>351</height>
+     <width>450</width>
+     <height>450</height>
     </rect>
    </property>
   </widget>
   <widget class="QComboBox" name="yComboBox">
    <property name="geometry">
     <rect>
-     <x>499</x>
-     <y>171</y>
+     <x>508</x>
+     <y>180</y>
      <width>101</width>
      <height>20</height>
     </rect>
@@ -36,8 +36,8 @@
   <widget class="QComboBox" name="xComboBox">
    <property name="geometry">
     <rect>
-     <x>499</x>
-     <y>141</y>
+     <x>508</x>
+     <y>150</y>
      <width>101</width>
      <height>20</height>
     </rect>
@@ -46,8 +46,8 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>461</x>
-     <y>141</y>
+     <x>470</x>
+     <y>150</y>
      <width>33</width>
      <height>16</height>
     </rect>
@@ -59,8 +59,8 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>461</x>
-     <y>171</y>
+     <x>470</x>
+     <y>180</y>
      <width>33</width>
      <height>16</height>
     </rect>
@@ -72,8 +72,8 @@
   <widget class="QLabel" name="rangeLabel">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>50</y>
+     <x>469</x>
+     <y>59</y>
      <width>141</width>
      <height>16</height>
     </rect>
@@ -85,8 +85,8 @@
   <widget class="QLineEdit" name="rangeLineEdit">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>70</y>
+     <x>469</x>
+     <y>79</y>
      <width>141</width>
      <height>20</height>
     </rect>
@@ -98,8 +98,8 @@
   <widget class="QPushButton" name="loadPushButton">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>100</y>
+     <x>469</x>
+     <y>109</y>
      <width>141</width>
      <height>23</height>
     </rect>
@@ -111,8 +111,8 @@
   <widget class="QLabel" name="sheetLabel">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>0</y>
+     <x>469</x>
+     <y>9</y>
      <width>91</width>
      <height>16</height>
     </rect>
@@ -124,8 +124,8 @@
   <widget class="QLineEdit" name="sheetLineEdit">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>20</y>
+     <x>469</x>
+     <y>29</y>
      <width>141</width>
      <height>20</height>
     </rect>
@@ -137,8 +137,8 @@
   <widget class="QPushButton" name="plotPushButton">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>310</y>
+     <x>469</x>
+     <y>319</y>
      <width>141</width>
      <height>23</height>
     </rect>
@@ -150,8 +150,8 @@
   <widget class="QGroupBox" name="typeGroupBox">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>200</y>
+     <x>469</x>
+     <y>209</y>
      <width>141</width>
      <height>71</height>
     </rect>
@@ -164,7 +164,7 @@
      <rect>
       <x>10</x>
       <y>20</y>
-      <width>121</width>
+      <width>76</width>
       <height>42</height>
      </rect>
     </property>
@@ -192,8 +192,8 @@
   <widget class="QPushButton" name="clearPushButton">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>340</y>
+     <x>469</x>
+     <y>349</y>
      <width>141</width>
      <height>23</height>
     </rect>
@@ -205,8 +205,8 @@
   <widget class="QComboBox" name="colorComboBox">
    <property name="geometry">
     <rect>
-     <x>500</x>
-     <y>280</y>
+     <x>509</x>
+     <y>289</y>
      <width>101</width>
      <height>22</height>
     </rect>
@@ -215,14 +215,27 @@
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>280</y>
-     <width>47</width>
-     <height>13</height>
+     <x>469</x>
+     <y>289</y>
+     <width>31</width>
+     <height>16</height>
     </rect>
    </property>
    <property name="text">
     <string>Color:</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="plotSettingsPushButton">
+   <property name="geometry">
+    <rect>
+     <x>469</x>
+     <y>379</y>
+     <width>141</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Plot Settings</string>
    </property>
   </widget>
  </widget>
