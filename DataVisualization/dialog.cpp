@@ -250,6 +250,9 @@ void Dialog::on_clearPushButton_clicked()
 void Dialog::on_plotSettingsPushButton_clicked()
 {
     // show PlotSettings
-    plotSettings = new PlotSettings(this);
+    plotSettings = new PlotSettings(this, ui->customPlot->xAxis->label(), ui->customPlot->yAxis->label(),
+                                    ui->customPlot->xAxis->range().lower, ui->customPlot->xAxis->range().upper,
+                                    ui->customPlot->yAxis->range().lower, ui->customPlot->yAxis->range().upper);
+    plotSettings->setAttribute(Qt::WA_DeleteOnClose, true);
     plotSettings->show();
 }
