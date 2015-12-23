@@ -26,6 +26,9 @@ Dialog::Dialog(QWidget *parent) :
     ui->colorComboBox->addItems(colors);
     ui->colorComboBox->setCurrentIndex(0);
 
+    // no data loaded to plot
+    dataLoaded = false;
+
     setWindowTitle(tr("Data Visualization"));
 }
 
@@ -51,7 +54,7 @@ void Dialog::printExcel(const QVector<QString> &columnNames, const QVector<QVect
 
 void Dialog::loadExcel(QString sheet, QString range)
 {
-    // setting up QSqlDatabase with QODBC to read excel worksheet
+    // setting up QSqlDatabase with QODBC to read excel workbook
     QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
     db.setDatabaseName("exceldsn64");
 
@@ -64,8 +67,6 @@ void Dialog::loadExcel(QString sheet, QString range)
         columnNames = new QVector<QString>;
         data = new QVector<QVector<double> > (columnCount);
         dateTimeData = new QVector<bool> (columnCount);
-
-        //qDebug() << query.record().field("OrderDate").type(); // only store ints and doubles and dates, multiple 2D vectors - filled depending on field.type
 
         // store column names
         for (int i = 0; i < columnCount; i++) {
@@ -101,6 +102,9 @@ void Dialog::loadExcel(QString sheet, QString range)
         }
 
         db.close();
+
+        // finished loaded Excel sheet
+        dataLoaded = true;
     } else {
         // if file cound't be opened, output last error that occured on the database
         qDebug() << db.lastError().text();
@@ -110,7 +114,7 @@ void Dialog::loadExcel(QString sheet, QString range)
 void Dialog::plot()
 {
     QPen plotPen;
-    // set graph color: Black,Blue,Red,Green,Yellow,Magenta,Cyan
+    // set graph color: Black,Blue,Red,Green,Yellow,Magenta,Cyan:
     switch (ui->colorComboBox->currentIndex()) {
     case 0:
       plotPen.setColor(Qt::black);
@@ -140,37 +144,46 @@ void Dialog::plot()
 
     int xIndex = ui->xComboBox->currentIndex();
     int yIndex = ui->yComboBox->currentIndex();
-    // check for type of graph
+    // check for type of graph:
     if (ui->lineRadioButton->isChecked()) {
-        // creating line graph and assigning data
+        // creating line graph and assigning data:
         QCPGraph *graph1 = ui->customPlot->addGraph();
         graph1->setPen(plotPen);
         graph1->setData((*data)[xIndex], (*data)[yIndex]);
     } else {
-        // creating bar chart and assigning data
+        // creating bar chart and assigning data:
         QCPBars *bars1 = new QCPBars(ui->customPlot->xAxis, ui->customPlot->yAxis);
         bars1->setPen(plotPen);
         ui->customPlot->addPlottable(bars1);
         bars1->setData((*data)[xIndex], (*data)[yIndex]);
     }
 
-    // if axis is datetime
-    if ((*dateTimeData)[xIndex] && !(*dateTimeData)[yIndex]) {
+    // if axis is datetime:
+    if ((*dateTimeData)[xIndex]) {
         ui->customPlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
         ui->customPlot->xAxis->setDateTimeFormat("MMMM\nyyyy");
     }
-    if (!(*dateTimeData)[xIndex] && (*dateTimeData)[yIndex]) {
-        ui->customPlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
+    if ((*dateTimeData)[yIndex]) {
+        ui->customPlot->yAxis->setTickLabelType(QCPAxis::ltDateTime);
         ui->customPlot->yAxis->setDateTimeFormat("MMMM\nyyyy");
     }
+    if (!(*dateTimeData)[xIndex]) {
+        ui->customPlot->xAxis->setTickLabelType(QCPAxis::ltNumber);
+    }
+    if (!(*dateTimeData)[yIndex]) {
+        ui->customPlot->yAxis->setTickLabelType(QCPAxis::ltNumber);
+    }
 
-    // setting axes labels
+    // setting axes labels:
     ui->customPlot->xAxis->setLabel((*columnNames)[xIndex]);
     ui->customPlot->yAxis->setLabel((*columnNames)[yIndex]);
 
-    // setting axes ranges
+    // setting axes ranges:
     ui->customPlot->xAxis->setRange(findMin((*data)[xIndex]), findMax((*data)[xIndex]));
     ui->customPlot->yAxis->setRange(findMin((*data)[yIndex]), findMax((*data)[yIndex]));
+
+    // show legend:
+    ui->customPlot->legend->setVisible(true);
 
     ui->customPlot->replot();
 }
@@ -216,10 +229,14 @@ void Dialog::on_loadPushButton_clicked()
 void Dialog::on_plotPushButton_clicked()
 {
     // only allow plotting of columns with valid data
-    if (((*data)[ui->xComboBox->currentIndex()].isEmpty() && !(*dateTimeData)[ui->xComboBox->currentIndex()]) ||
+    if (!dataLoaded){
+        QMessageBox::warning(this,tr("No Data Warning"),tr("Please load an Excel worksheet before attempting to plot."));
+    }
+    else if (((*data)[ui->xComboBox->currentIndex()].isEmpty() && !(*dateTimeData)[ui->xComboBox->currentIndex()]) ||
             ((*data)[ui->yComboBox->currentIndex()].isEmpty() && !(*dateTimeData)[ui->yComboBox->currentIndex()])) {
         QMessageBox::warning(this,tr("Data Warning"),tr("Only columns with value type 'double' or 'DateTime' can be plotted."));
-    } else {
+    }
+    else {
         plot();
     }
 }

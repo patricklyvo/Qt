@@ -33,6 +33,7 @@ private:
     QVector<QString> *columnNames;
     QVector<QVector<double> > *data;
     QVector<bool> *dateTimeData;
+    bool dataLoaded;
 
 private slots:
     void on_loadPushButton_clicked();
