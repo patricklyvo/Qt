@@ -137,8 +137,8 @@
   <widget class="QPushButton" name="plotPushButton">
    <property name="geometry">
     <rect>
-     <x>469</x>
-     <y>319</y>
+     <x>470</x>
+     <y>370</y>
      <width>141</width>
      <height>23</height>
     </rect>
@@ -192,8 +192,8 @@
   <widget class="QPushButton" name="clearPushButton">
    <property name="geometry">
     <rect>
-     <x>469</x>
-     <y>349</y>
+     <x>470</x>
+     <y>400</y>
      <width>141</width>
      <height>23</height>
     </rect>
@@ -228,14 +228,40 @@
   <widget class="QPushButton" name="plotSettingsPushButton">
    <property name="geometry">
     <rect>
-     <x>469</x>
-     <y>379</y>
+     <x>470</x>
+     <y>430</y>
      <width>141</width>
      <height>23</height>
     </rect>
    </property>
    <property name="text">
     <string>Plot Settings</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="graphNameLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>340</y>
+     <width>141</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>ex. Graph 1</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="graphNameLabel">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>320</y>
+     <width>141</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Enter a name for the graph:</string>
    </property>
   </widget>
  </widget>

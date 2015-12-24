@@ -148,12 +148,22 @@ void Dialog::plot()
         QCPGraph *graph1 = ui->customPlot->addGraph();
         graph1->setPen(plotPen);
         graph1->setData((*data)[xIndex], (*data)[yIndex]);
+
+        // set graph names if specified
+        if (!ui->graphNameLineEdit->text().isEmpty()) {
+            graph1->setName(ui->graphNameLineEdit->text());
+        }
     } else {
         // creating bar chart and assigning data:
         QCPBars *bars1 = new QCPBars(ui->customPlot->xAxis, ui->customPlot->yAxis);
         bars1->setPen(plotPen);
         ui->customPlot->addPlottable(bars1);
         bars1->setData((*data)[xIndex], (*data)[yIndex]);
+
+        // set graph names if specified
+        if (!ui->graphNameLineEdit->text().isEmpty()) {
+            bars1->setName(ui->graphNameLineEdit->text());
+        }
     }
 
     // if axis is datetime:

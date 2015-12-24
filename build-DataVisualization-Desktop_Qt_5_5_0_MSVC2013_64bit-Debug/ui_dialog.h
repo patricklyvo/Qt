@@ -50,6 +50,8 @@ public:
     QComboBox *colorComboBox;
     QLabel *label_3;
     QPushButton *plotSettingsPushButton;
+    QLineEdit *graphNameLineEdit;
+    QLabel *graphNameLabel;
 
     void setupUi(QDialog *Dialog)
     {
@@ -88,7 +90,7 @@ public:
         sheetLineEdit->setGeometry(QRect(469, 29, 141, 20));
         plotPushButton = new QPushButton(Dialog);
         plotPushButton->setObjectName(QStringLiteral("plotPushButton"));
-        plotPushButton->setGeometry(QRect(469, 319, 141, 23));
+        plotPushButton->setGeometry(QRect(470, 370, 141, 23));
         typeGroupBox = new QGroupBox(Dialog);
         typeGroupBox->setObjectName(QStringLiteral("typeGroupBox"));
         typeGroupBox->setGeometry(QRect(469, 209, 141, 71));
@@ -113,7 +115,7 @@ public:
 
         clearPushButton = new QPushButton(Dialog);
         clearPushButton->setObjectName(QStringLiteral("clearPushButton"));
-        clearPushButton->setGeometry(QRect(469, 349, 141, 23));
+        clearPushButton->setGeometry(QRect(470, 400, 141, 23));
         colorComboBox = new QComboBox(Dialog);
         colorComboBox->setObjectName(QStringLiteral("colorComboBox"));
         colorComboBox->setGeometry(QRect(509, 289, 101, 22));
@@ -122,7 +124,13 @@ public:
         label_3->setGeometry(QRect(469, 289, 31, 16));
         plotSettingsPushButton = new QPushButton(Dialog);
         plotSettingsPushButton->setObjectName(QStringLiteral("plotSettingsPushButton"));
-        plotSettingsPushButton->setGeometry(QRect(469, 379, 141, 23));
+        plotSettingsPushButton->setGeometry(QRect(470, 430, 141, 23));
+        graphNameLineEdit = new QLineEdit(Dialog);
+        graphNameLineEdit->setObjectName(QStringLiteral("graphNameLineEdit"));
+        graphNameLineEdit->setGeometry(QRect(470, 340, 141, 20));
+        graphNameLabel = new QLabel(Dialog);
+        graphNameLabel->setObjectName(QStringLiteral("graphNameLabel"));
+        graphNameLabel->setGeometry(QRect(470, 320, 141, 16));
         QWidget::setTabOrder(sheetLineEdit, rangeLineEdit);
         QWidget::setTabOrder(rangeLineEdit, loadPushButton);
         QWidget::setTabOrder(loadPushButton, xComboBox);
@@ -154,6 +162,8 @@ public:
         clearPushButton->setText(QApplication::translate("Dialog", "Clear Graphs", 0));
         label_3->setText(QApplication::translate("Dialog", "Color:", 0));
         plotSettingsPushButton->setText(QApplication::translate("Dialog", "Plot Settings", 0));
+        graphNameLineEdit->setPlaceholderText(QApplication::translate("Dialog", "ex. Graph 1", 0));
+        graphNameLabel->setText(QApplication::translate("Dialog", "Enter a name for the graph:", 0));
     } // retranslateUi
 
 };
