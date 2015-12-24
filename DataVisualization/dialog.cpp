@@ -255,4 +255,35 @@ void Dialog::on_plotSettingsPushButton_clicked()
                                     ui->customPlot->yAxis->range().lower, ui->customPlot->yAxis->range().upper);
     plotSettings->setAttribute(Qt::WA_DeleteOnClose, true);
     plotSettings->show();
+
+    // connecting signal and slot to update x or y axis labels
+    connect(plotSettings, SIGNAL(xAxisLabelChanged(QString)), this, SLOT(updateLabelX(QString)));
+    connect(plotSettings, SIGNAL(yAxisLabelChanged(QString)), this, SLOT(updateLabelY(QString)));
+    // connecting signal and slot to update x or y axis ranges
+    connect(plotSettings, SIGNAL(xAxisRangechanged(double,double)), this, SLOT(updateRangeX(double,double)));
+    connect(plotSettings, SIGNAL(yAxisRangechanged(double,double)), this, SLOT(updateRangeY(double,double)));
+}
+
+void Dialog::updateLabelX(QString label)
+{
+    ui->customPlot->xAxis->setLabel(label);
+    ui->customPlot->replot();
+}
+
+void Dialog::updateLabelY(QString label)
+{
+    ui->customPlot->yAxis->setLabel(label);
+    ui->customPlot->replot();
+}
+
+void Dialog::updateRangeX(double low, double high)
+{
+    ui->customPlot->xAxis->setRange(low, high);
+    ui->customPlot->replot();
+}
+
+void Dialog::updateRangeY(double low, double high)
+{
+    ui->customPlot->yAxis->setRange(low, high);
+    ui->customPlot->replot();
 }

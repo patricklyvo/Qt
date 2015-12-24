@@ -2,6 +2,8 @@
 #define PLOTSETTINGS_H
 
 #include <QDialog>
+#include <QDebug>
+#include <QtWidgets>
 
 namespace Ui {
 class PlotSettings;
@@ -19,6 +21,15 @@ private slots:
     void on_saveSettingsPushButton_clicked();
 
     void on_cancelSettingsPushButton_clicked();
+
+signals:
+    void xAxisLabelChanged(QString label);
+
+    void yAxisLabelChanged(QString label);
+
+    void xAxisRangechanged(double low, double high);
+
+    void yAxisRangechanged(double low, double high);
 
 private:
     Ui::PlotSettings *ui;
